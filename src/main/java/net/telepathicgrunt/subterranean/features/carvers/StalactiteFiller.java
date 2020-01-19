@@ -46,7 +46,6 @@ public class StalactiteFiller extends CaveWorldCarver
 			double y = (double) this.generateCaveStartY(random);  // Lowers each room by 20 blocks so they are stacked
 			double z = (double) (zChunk * 16); //+ random.nextInt(16));   // Randomizes spot of each room
 			
-			
 			float caveRadius = 20.0F + random.nextFloat() * 10.0F; // How thick the cave is
 			this.carveCave(chunk, biomeFunction, random.nextLong(), unusedInt1, unusedInt2, unusedInt3, x, y, z, caveRadius, 0.5D, caveMask);
 		
