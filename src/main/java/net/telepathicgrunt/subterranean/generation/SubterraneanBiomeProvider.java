@@ -26,7 +26,7 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.layer.Layer;
 import net.minecraft.world.gen.layer.ZoomLayer;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer1;
-import net.telepathicgrunt.subterranean.generation.layer.BiomeDebugLayer;
+import net.telepathicgrunt.subterranean.generation.layer.ConcentricBiomeLayoutLayer;
 import net.telepathicgrunt.subterranean.world.biome.BiomeInit;
 
 
@@ -51,6 +51,7 @@ public class SubterraneanBiomeProvider extends BiomeProvider
 	public SubterraneanBiomeProvider(World world)
 	{
 		this(world.getSeed(), world.getWorldInfo().getGenerator());
+		ConcentricBiomeLayoutLayer.setSeed(world.getSeed());
 	}
 
 
@@ -82,7 +83,7 @@ public class SubterraneanBiomeProvider extends BiomeProvider
 
 	public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList<IAreaFactory<T>> buildOverworldProcedure(WorldType worldTypeIn, LongFunction<C> contextFactory)
 	{
-		IAreaFactory<T> layer = BiomeDebugLayer.INSTANCE.apply(contextFactory.apply(200L));
+		IAreaFactory<T> layer = ConcentricBiomeLayoutLayer.INSTANCE.apply(contextFactory.apply(200L));
 		layer = ZoomLayer.FUZZY.apply(contextFactory.apply(2000L), layer);
 		layer = ZoomLayer.NORMAL.apply((IExtendedNoiseRandom<T>) contextFactory.apply(1001L), layer);
 

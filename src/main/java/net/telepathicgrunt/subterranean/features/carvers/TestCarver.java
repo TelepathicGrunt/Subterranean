@@ -23,11 +23,12 @@ import net.minecraft.world.gen.carver.CaveWorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 
 
-public class StalactiteFiller extends CaveWorldCarver
+public class TestCarver extends CaveWorldCarver
 {
 	protected Set<Fluid> carvableFluids = ImmutableSet.of(Fluids.WATER, Fluids.LAVA, Fluids.FLOWING_WATER);
 
-	public StalactiteFiller(Function<Dynamic<?>, ? extends ProbabilityConfig> deserialize)
+
+	public TestCarver(Function<Dynamic<?>, ? extends ProbabilityConfig> deserialize)
 	{
 		super(deserialize, 256);
 	}
@@ -39,7 +40,7 @@ public class StalactiteFiller extends CaveWorldCarver
 	@Override
 	protected int generateCaveStartY(Random random)
 	{
-		return 114;
+		return 114 + random.nextInt(9);
 	}
 
 
@@ -49,17 +50,26 @@ public class StalactiteFiller extends CaveWorldCarver
 	public boolean carve(IChunk chunk, Function<BlockPos, Biome> biomeFunction, Random random, int yChunk, int xChunk, int zChunk, int xChunk2, int zChunk2, BitSet caveMask, ProbabilityConfig chanceConfig)
 	{
 		double x = (double) (xChunk * 16);// + random.nextInt(16));   // Randomizes spot of each room
-		double y = (double) this.generateCaveStartY(random);  // Lowers each room by 20 blocks so they are stacked
+		double y = (double) this.generateCaveStartY(random);  // 
 		double z = (double) (zChunk * 16); //+ random.nextInt(16));   // Randomizes spot of each room
 
-		float caveRadius = 32.0F + random.nextFloat() * 15.0F; // How thick the cave is
-		this.carveCave(chunk, biomeFunction, random.nextLong(), yChunk, xChunk2, zChunk2, x, y, z, caveRadius, 2.2D, caveMask);
+		float caveRadius = 31.5F + random.nextFloat() * 15.0F; // How thick the cave is
+		boolean lavaBottom = random.nextFloat() < 0.4F;
+		this.carveCave(chunk, biomeFunction, random.nextLong(), yChunk, xChunk2, zChunk2, x, y, z, caveRadius, 2.2D, caveMask, lavaBottom);
 
 		return true;
 	}
 
 
-	protected boolean carveRegion(IChunk chunk, Function<BlockPos, Biome> biomeFunction, long seed, int yChunk, int xChunk, int zChunk, double x, double y, double z, double caveRadius, double heightModifier, BitSet caveMask)
+	protected void carveCave(IChunk chunk, Function<BlockPos, Biome> biomeFunction, long seed, int yChunk, int xChunk, int zChunk, double x, double y, double z, float caveRadius, double heightModifier, BitSet caveMask, boolean lavaBottom)
+	{
+		double finalRadius = 1.5D + (double) (MathHelper.sin(((float) Math.PI / 2F)) * caveRadius);
+		double finalHeight = finalRadius * heightModifier;
+		this.carveRegion(chunk, biomeFunction, seed, yChunk, xChunk, zChunk, x + 1.0D, y, z, finalRadius, finalHeight, caveMask, lavaBottom);
+	}
+
+
+	protected boolean carveRegion(IChunk chunk, Function<BlockPos, Biome> biomeFunction, long seed, int yChunk, int xChunk, int zChunk, double x, double y, double z, double caveRadius, double heightModifier, BitSet caveMask, boolean lavaBottom)
 	{
 		Random random = new Random(seed + (long) xChunk + (long) zChunk);
 		double trueX = (double) (xChunk * 16 + 8);
@@ -96,9 +106,12 @@ public class StalactiteFiller extends CaveWorldCarver
 						
 						if (!(xInChunk * xInChunk + zInChunk * zInChunk + yInChunk * yInChunk >= 1.0D))
 						{
-							if(yPos <= yMin + 2) 
+							if(yPos == yMin + 2) 
 							{
-								bottom = true;
+								if(lavaBottom) 
+								{
+									bottom = true;
+								}
 							}
 							flag |= this.carveAtPoint(chunk, biomeFunction, caveMask, random, blockpos$mutable, blockpos$mutable1, blockpos$mutable2, yChunk, xChunk, zChunk, xCord, zCord, xPos, yPos, zPos, atomicboolean, bottom);
 						}
@@ -118,10 +131,10 @@ public class StalactiteFiller extends CaveWorldCarver
 	protected boolean carveAtPoint(IChunk chunk, Function<BlockPos, Biome> biomeFunction, BitSet carvingMask, Random random, BlockPos.Mutable posHere, BlockPos.Mutable posAbove, BlockPos.Mutable posBelow, int yChunk, int xChunk, int zChunk, int globalX, int globalZ, int x, int y, int z, AtomicBoolean foundSurface, boolean bottom)
 	{
 		int index = x | z << 4 | y << 8; //Not sure what this specific section is for. I know the mask is used so other features can find caves space.
-//		if (carvingMask.get(index))
-//		{
-//			return false;
-//		}
+		//		if (carvingMask.get(index))
+		//		{
+		//			return false;
+		//		}
 
 		carvingMask.set(index);
 		posHere.setPos(globalX, y, globalZ);
@@ -133,16 +146,16 @@ public class StalactiteFiller extends CaveWorldCarver
 			return false;
 		}
 
-		if((bottom && stateAbove.getMaterial() != Material.LAVA) || stateAbove.getMaterial() == Material.WATER) 
-		{
-			chunk.setBlockState(posHere, WATER.getBlockState(), false);
-		}
-		else if (y <= 10) // sets lava below lava level
+		if ((bottom && stateAbove.getMaterial() != Material.WATER) || stateAbove.getMaterial() == Material.LAVA)
 		{
 			chunk.setBlockState(posHere, LAVA.getBlockState(), false);
 		}
+		else if (y <= 35) // sets lava below lava level
+		{
+			chunk.setBlockState(posHere, WATER.getBlockState(), false);
+		}
 		else  // carves air when above lava level
-		{ 
+		{
 			chunk.setBlockState(posHere, CAVE_AIR, false);
 		}
 
@@ -157,7 +170,7 @@ public class StalactiteFiller extends CaveWorldCarver
 			return false;
 
 		Material material = state.getMaterial();
-		return (material == Material.WATER || material == Material.ROCK || material == Material.EARTH || material == Material.ORGANIC || material == Material.SAND);
+		return (material == Material.LAVA || material == Material.ROCK || material == Material.EARTH || material == Material.ORGANIC || material == Material.SAND);
 	}
 
 }

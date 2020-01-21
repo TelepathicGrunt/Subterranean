@@ -105,5 +105,14 @@ public class GenericSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 			}
 		}
 
+		//do stalactite last
+		SubterraneanBiome.LARGE_STALACTITE_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, SubterraneanBiome.STONE_STONE_STONE_SURFACE_CONFIG);
+		SubterraneanBiome.SMALL_STALACTITE_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, SubterraneanBiome.STONE_STONE_STONE_SURFACE_CONFIG);
+	}
+
+	public void setSeed(long seed)
+	{
+		SubterraneanBiome.LARGE_STALACTITE_SURFACE_BUILDER.setSeed(seed);
+		SubterraneanBiome.SMALL_STALACTITE_SURFACE_BUILDER.setSeed(seed);
 	}
 }

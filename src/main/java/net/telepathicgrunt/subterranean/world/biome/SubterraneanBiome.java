@@ -6,6 +6,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import net.telepathicgrunt.subterranean.world.biomes.surfacebuilders.GenericSurfaceBuilder;
+import net.telepathicgrunt.subterranean.world.biomes.surfacebuilders.LargeStalactiteSurfaceBuilder;
+import net.telepathicgrunt.subterranean.world.biomes.surfacebuilders.SmallStalactiteSurfaceBuilder;
 
 public class SubterraneanBiome extends Biome {
 
@@ -37,8 +39,11 @@ public class SubterraneanBiome extends Biome {
     
     public static final SurfaceBuilderConfig GENERIC_SURFACE_CONFIG = new SurfaceBuilderConfig(STONE, ANDESITE, GRAVEL);
     public static final SurfaceBuilderConfig COARSE_DIRT_ANDESITE_GRAVEL_CONFIG = new SurfaceBuilderConfig(COARSE_DIRT, ANDESITE, GRAVEL);
-    
+    public static final SurfaceBuilderConfig STONE_STONE_STONE_SURFACE_CONFIG = new SurfaceBuilderConfig(STONE, STONE, STONE);
+
     public static final SurfaceBuilder<SurfaceBuilderConfig> GENERIC_SURFACE_BUILDER = new GenericSurfaceBuilder(SurfaceBuilderConfig::deserialize);
+    public static final SurfaceBuilder<SurfaceBuilderConfig> LARGE_STALACTITE_SURFACE_BUILDER = new LargeStalactiteSurfaceBuilder(SurfaceBuilderConfig::deserialize);
+    public static final SurfaceBuilder<SurfaceBuilderConfig> SMALL_STALACTITE_SURFACE_BUILDER = new SmallStalactiteSurfaceBuilder(SurfaceBuilderConfig::deserialize);
     
 	protected SubterraneanBiome(Biome.Builder biomeBuilder) {
 		super(biomeBuilder);

@@ -35,7 +35,7 @@ public class SubterraneanWorldProvider extends Dimension
 		{
 			if (i < 1)
 			{
-				this.lightBrightnessTable[i] = (float) 1 / 20.0F;
+				this.lightBrightnessTable[i] = (float) 1.2 / 20.0F;
 			}
 			else
 			{

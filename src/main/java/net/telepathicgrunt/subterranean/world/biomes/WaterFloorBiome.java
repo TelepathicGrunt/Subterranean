@@ -22,7 +22,7 @@ public final class WaterFloorBiome extends SubterraneanBiome
 {
 	public WaterFloorBiome()
 	{
-		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(GENERIC_SURFACE_BUILDER, GENERIC_SURFACE_CONFIG)).precipitation(Biome.RainType.NONE).category(Biome.Category.OCEAN).depth(-3.1F).scale(0.5F).temperature(0.3F).downfall(0.0F).waterColor(3093146).waterFogColor(2172035).parent((String) null));
+		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(GENERIC_SURFACE_BUILDER, GENERIC_SURFACE_CONFIG)).precipitation(Biome.RainType.NONE).category(Biome.Category.OCEAN).depth(-3.1F).scale(0.05F).temperature(0.3F).downfall(0.0F).waterColor(3093146).waterFogColor(2172035).parent((String) null));
 
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.DISK.configure(new SphereReplaceConfig(COAL_ORE, 4, 2, Lists.newArrayList(GRAVEL, ANDESITE))).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(6, 5, 0, 24))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.DISK.configure(new SphereReplaceConfig(GRAY_CONCRETE, 4, 2, Lists.newArrayList(GRAVEL, ANDESITE))).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(4, 5, 0, 24))));

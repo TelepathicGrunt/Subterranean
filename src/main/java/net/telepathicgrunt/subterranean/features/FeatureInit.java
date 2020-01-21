@@ -6,7 +6,7 @@ import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.telepathicgrunt.subterranean.Subterranean;
-import net.telepathicgrunt.subterranean.features.carvers.StalactiteFiller;
+import net.telepathicgrunt.subterranean.features.carvers.TestCarver;
 
 public class FeatureInit
 {
@@ -18,5 +18,5 @@ public class FeatureInit
         Subterranean.LOGGER.debug("FEATURE REGISTER");
     }
     
-    public static WorldCarver<ProbabilityConfig> STALACTITE_FILLER = new StalactiteFiller(ProbabilityConfig::deserialize);
+    public static WorldCarver<ProbabilityConfig> STALACTITE_FILLER = new TestCarver(ProbabilityConfig::deserialize);
 }
