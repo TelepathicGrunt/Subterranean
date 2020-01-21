@@ -15,15 +15,15 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.Mod;
 import net.telepathicgrunt.subterranean.Subterranean;
-import net.telepathicgrunt.subterranean.generation.SubterraneanBiomeProvider;
-import net.telepathicgrunt.subterranean.generation.SubterraneanChunkGenerator;
+import net.telepathicgrunt.subterranean.generation.STBiomeProvider;
+import net.telepathicgrunt.subterranean.generation.STChunkGenerator;
 
 
 @Mod.EventBusSubscriber(modid = Subterranean.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class SubterraneanWorldProvider extends Dimension
+public class STWorldProvider extends Dimension
 {
 
-	public SubterraneanWorldProvider(World world, DimensionType typeIn)
+	public STWorldProvider(World world, DimensionType typeIn)
 	{
 		super(world, typeIn, 1.0f); //set 1.0f. I think it has to do with maximum brightness?
 
@@ -191,6 +191,6 @@ public class SubterraneanWorldProvider extends Dimension
 	@Override
 	public ChunkGenerator<?> createChunkGenerator()
 	{
-		return new SubterraneanChunkGenerator(world, new SubterraneanBiomeProvider(world), ChunkGeneratorType.SURFACE.createSettings());
+		return new STChunkGenerator(world, new STBiomeProvider(world), ChunkGeneratorType.SURFACE.createSettings());
 	}
 }

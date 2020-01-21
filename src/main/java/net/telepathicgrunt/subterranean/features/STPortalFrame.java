@@ -15,13 +15,13 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.telepathicgrunt.subterranean.blocks.BlocksInit;
 
-public class SubterraneanPortalFrame extends Feature<NoFeatureConfig> {
+public class STPortalFrame extends Feature<NoFeatureConfig> {
 
 	private static final BlockState POLISHED_GRANITE = Blocks.POLISHED_GRANITE.getDefaultState();
 	private static final BlockState POLISHED_ANDESITE_SLAB_TOP = Blocks.POLISHED_ANDESITE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.TOP);
 	private static final BlockState POLISHED_ANDESITE_SLAB_BOTTOM = Blocks.POLISHED_ANDESITE_SLAB.getDefaultState().with(SlabBlock.TYPE, SlabType.BOTTOM);
 	
-   public SubterraneanPortalFrame() {
+   public STPortalFrame() {
       super(NoFeatureConfig::deserialize);
    }
 

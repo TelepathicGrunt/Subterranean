@@ -18,7 +18,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.spawner.WorldEntitySpawner;
 
 
-public class SubterraneanChunkGenerator extends SubterraneanNoiseChunkGenerator<OverworldGenSettings>
+public class STChunkGenerator extends STNoiseChunkGenerator<OverworldGenSettings>
 {
 	private static final float[] field_222576_h = Util.make(new float[25], (p_222575_0_) ->
 	{
@@ -34,7 +34,7 @@ public class SubterraneanChunkGenerator extends SubterraneanNoiseChunkGenerator<
 	});
 	private final OctavesNoiseGenerator depthNoise;
 
-	public SubterraneanChunkGenerator(IWorld world, BiomeProvider provider, OverworldGenSettings settingsIn)
+	public STChunkGenerator(IWorld world, BiomeProvider provider, OverworldGenSettings settingsIn)
 	{
 		super(world, provider, 4, 8, 256, settingsIn);
 		this.randomSeed.skip(2620);
@@ -55,7 +55,7 @@ public class SubterraneanChunkGenerator extends SubterraneanNoiseChunkGenerator<
 
 	protected void fillNoiseColumn(double[] areaArrayIn, int x, int z)
 	{
-		this.setupPerlinNoiseGenerators(areaArrayIn, x, z, 20, 6200, 20, 42, 4, 3, -10);
+		this.setupPerlinNoiseGenerators(areaArrayIn, x, z, 20, 5680, 20, 42, 4, 3, -10);
 	}
 
 

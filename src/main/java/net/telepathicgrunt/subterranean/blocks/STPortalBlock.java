@@ -20,15 +20,15 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.telepathicgrunt.subterranean.world.dimension.SubterraneanDimension;
+import net.telepathicgrunt.subterranean.world.dimension.STDimension;
 
 
-public class SubterraneanPortalBlock extends Block
+public class STPortalBlock extends Block
 {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
 
-	public SubterraneanPortalBlock()
+	public STPortalBlock()
 	{
 		super(Block.Properties.create(Material.GLASS, MaterialColor.BLACK).lightValue(15).hardnessAndResistance(5.0F, 3600000.0F));
 
@@ -84,7 +84,7 @@ public class SubterraneanPortalBlock extends Block
 		else
 		{
 			// if we are in UA dimension
-			if (world.getDimension().getType() == SubterraneanDimension.subterranean())
+			if (world.getDimension().getType() == STDimension.subterranean())
 			{
 
 				// if we are at default portal coordinate

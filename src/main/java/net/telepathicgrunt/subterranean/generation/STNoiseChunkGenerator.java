@@ -34,7 +34,7 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
 
-public abstract class SubterraneanNoiseChunkGenerator<T extends GenerationSettings> extends ChunkGenerator<T> {
+public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extends ChunkGenerator<T> {
 
 	private static final BlockState STONE = Blocks.STONE.getDefaultState();
     private static final BlockState WATER = Blocks.WATER.getDefaultState();
@@ -66,7 +66,7 @@ public abstract class SubterraneanNoiseChunkGenerator<T extends GenerationSettin
 	protected final BlockState defaultBlock;
 	protected final BlockState defaultFluid;
 
-	public SubterraneanNoiseChunkGenerator(IWorld p_i49931_1_, BiomeProvider p_i49931_2_, int horizontalNoiseGranularityIn, int verticalNoiseGranularityIn, int p_i49931_5_, T p_i49931_6_) {
+	public STNoiseChunkGenerator(IWorld p_i49931_1_, BiomeProvider p_i49931_2_, int horizontalNoiseGranularityIn, int verticalNoiseGranularityIn, int p_i49931_5_, T p_i49931_6_) {
 		super(p_i49931_1_, p_i49931_2_, p_i49931_6_);
 		this.verticalNoiseGranularity = verticalNoiseGranularityIn;
 		this.horizontalNoiseGranularity = horizontalNoiseGranularityIn;

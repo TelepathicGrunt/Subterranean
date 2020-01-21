@@ -7,10 +7,10 @@ import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.telepathicgrunt.subterranean.features.FeatureInit;
-import net.telepathicgrunt.subterranean.world.biome.SubterraneanBiome;
+import net.telepathicgrunt.subterranean.world.biome.STBiome;
 
 
-public final class TestBiome extends SubterraneanBiome
+public final class TestBiome extends STBiome
 {	
 	public TestBiome()
 	{

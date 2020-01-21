@@ -33,11 +33,11 @@ import net.telepathicgrunt.subterranean.Subterranean;
 import net.telepathicgrunt.subterranean.blocks.BlocksInit;
 import net.telepathicgrunt.subterranean.capabilities.IPlayerPosAndDim;
 import net.telepathicgrunt.subterranean.capabilities.PlayerPositionAndDimension;
-import net.telepathicgrunt.subterranean.features.SubterraneanPortalFrame;
-import net.telepathicgrunt.subterranean.world.dimension.SubterraneanDimension;
+import net.telepathicgrunt.subterranean.features.STPortalFrame;
+import net.telepathicgrunt.subterranean.world.dimension.STDimension;
 
 @Mod.EventBusSubscriber(modid = Subterranean.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class SubterraneanPortalBehavior {
+public class STPortalBehavior {
 	
 	
 	@CapabilityInject(IPlayerPosAndDim.class)
@@ -69,7 +69,7 @@ public class SubterraneanPortalBehavior {
 					if(cap.getDim() == null) {
 						//first trip will always take player to ultra amplified dimension
 						//as default dim for cap is always null when player hasn't teleported yet
-						destination = SubterraneanDimension.subterranean();
+						destination = STDimension.subterranean();
 						firstTime = true;
 						
 			    	   //double check for portal as this class gets made multiple times
@@ -82,8 +82,8 @@ public class SubterraneanPortalBehavior {
 					else if(cap.getDim() == entityIn.dimension){
 						// if our stored dimension somehow ends up being our current dimension and isn't the ultra amplified dimension, 
 						// then just take us to ultra amplified dimension instead
-						if(cap.getDim() != SubterraneanDimension.subterranean()) {
-							destination = SubterraneanDimension.subterranean();
+						if(cap.getDim() != STDimension.subterranean()) {
+							destination = STDimension.subterranean();
 						}
 						//if the store dimension and player dimension is ultra amplified world, take us to overworld
 						else {
@@ -214,7 +214,7 @@ public class SubterraneanPortalBehavior {
 	    
 	    
 	    private static void generatePortal(World world) {
-	    	SubterraneanPortalFrame amplifiedportalfeature = new SubterraneanPortalFrame();
+	    	STPortalFrame amplifiedportalfeature = new STPortalFrame();
 	    	BlockPos pos = new BlockPos(8, 255, 8);
 	    	world.getChunkAt(pos);
 	    	

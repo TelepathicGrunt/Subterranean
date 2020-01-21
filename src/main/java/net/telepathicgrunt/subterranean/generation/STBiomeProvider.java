@@ -27,17 +27,18 @@ import net.minecraft.world.gen.layer.Layer;
 import net.minecraft.world.gen.layer.ZoomLayer;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer1;
 import net.telepathicgrunt.subterranean.generation.layer.ConcentricBiomeLayoutLayer;
+import net.telepathicgrunt.subterranean.generation.layer.StartingBiomesLayer;
 import net.telepathicgrunt.subterranean.world.biome.BiomeInit;
 
 
-public class SubterraneanBiomeProvider extends BiomeProvider
+public class STBiomeProvider extends BiomeProvider
 {
 
 	private final Layer genBiomes;
 	private final Set<Biome> biomes;
 
 
-	public SubterraneanBiomeProvider(long seed, WorldType worldType)
+	public STBiomeProvider(long seed, WorldType worldType)
 	{
 		super(ImmutableSet.of(BiomeInit.CENTERAL_ISLES_BIOME));
 		biomes = ImmutableSet.of(BiomeInit.CENTERAL_ISLES_BIOME);
@@ -48,7 +49,7 @@ public class SubterraneanBiomeProvider extends BiomeProvider
 	}
 
 
-	public SubterraneanBiomeProvider(World world)
+	public STBiomeProvider(World world)
 	{
 		this(world.getSeed(), world.getWorldInfo().getGenerator());
 		ConcentricBiomeLayoutLayer.setSeed(world.getSeed());
@@ -83,10 +84,11 @@ public class SubterraneanBiomeProvider extends BiomeProvider
 
 	public static <T extends IArea, C extends IExtendedNoiseRandom<T>> ImmutableList<IAreaFactory<T>> buildOverworldProcedure(WorldType worldTypeIn, LongFunction<C> contextFactory)
 	{
-		IAreaFactory<T> layer = ConcentricBiomeLayoutLayer.INSTANCE.apply(contextFactory.apply(200L));
+		IAreaFactory<T> layer = StartingBiomesLayer.INSTANCE.apply(contextFactory.apply(200L));
 		layer = ZoomLayer.FUZZY.apply(contextFactory.apply(2000L), layer);
 		layer = ZoomLayer.NORMAL.apply((IExtendedNoiseRandom<T>) contextFactory.apply(1001L), layer);
-
+		//layer = ConcentricBiomeLayoutLayer.INSTANCE.apply(contextFactory.apply(2001L), layer);
+		
 		return ImmutableList.of(layer, layer, layer);
 	}
 

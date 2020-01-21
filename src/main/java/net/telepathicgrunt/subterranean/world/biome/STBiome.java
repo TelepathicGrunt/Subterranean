@@ -9,7 +9,7 @@ import net.telepathicgrunt.subterranean.world.biomes.surfacebuilders.GenericSurf
 import net.telepathicgrunt.subterranean.world.biomes.surfacebuilders.LargeStalactiteSurfaceBuilder;
 import net.telepathicgrunt.subterranean.world.biomes.surfacebuilders.SmallStalactiteSurfaceBuilder;
 
-public class SubterraneanBiome extends Biome {
+public class STBiome extends Biome {
 
     protected static final BlockState STONE = Blocks.STONE.getDefaultState();
     protected static final BlockState COBBLESTONE = Blocks.COBBLESTONE.getDefaultState();
@@ -45,7 +45,7 @@ public class SubterraneanBiome extends Biome {
     public static final SurfaceBuilder<SurfaceBuilderConfig> LARGE_STALACTITE_SURFACE_BUILDER = new LargeStalactiteSurfaceBuilder(SurfaceBuilderConfig::deserialize);
     public static final SurfaceBuilder<SurfaceBuilderConfig> SMALL_STALACTITE_SURFACE_BUILDER = new SmallStalactiteSurfaceBuilder(SurfaceBuilderConfig::deserialize);
     
-	protected SubterraneanBiome(Biome.Builder biomeBuilder) {
+	protected STBiome(Biome.Builder biomeBuilder) {
 		super(biomeBuilder);
 	}
 	

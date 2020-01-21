@@ -28,12 +28,12 @@ import net.telepathicgrunt.subterranean.Subterranean;
 
 @SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = Subterranean.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class SubterraneanDimension {
+public class STDimension {
 
 	public static final ModDimension SUBTERRANEAN = new ModDimension() {
         @Override
         public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
-            return SubterraneanWorldProvider::new;
+            return STWorldProvider::new;
         }
     };
 
@@ -72,7 +72,7 @@ public class SubterraneanDimension {
                     .encoder(S2CDimensionSync::encode)
                     .buildLoginPacketList(isLocal -> {
                         if (isLocal) return ImmutableList.of();
-                        return ImmutableList.of(Pair.of("Ultra Amplified Dim Sync", new S2CDimensionSync(SubterraneanDimension.subterranean())));
+                        return ImmutableList.of(Pair.of("Ultra Amplified Dim Sync", new S2CDimensionSync(STDimension.subterranean())));
                     })
                     .consumer((msg, ctx) -> {
                         if (DimensionManager.getRegistry().getByValue(msg.id) == null) {

@@ -19,7 +19,7 @@ public class BlocksInit
     public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Subterranean.MODID);
 
     public static final RegistryObject<Block> SUBTERRANEAN_PORTAL = BLOCKS.register("subterranean_portal",
-            () -> new SubterraneanPortalBlock()
+            () -> new STPortalBlock()
     );
     
 	//creative tab to hold our block items
@@ -40,7 +40,7 @@ public class BlocksInit
 	public static void registerBlocks(RegistryEvent.Register<Block> event)
 	{
 		event.getRegistry().registerAll(
-				new SubterraneanPortalBlock());
+				new STPortalBlock());
 	}
 
 
