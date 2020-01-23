@@ -55,7 +55,7 @@ public class STChunkGenerator extends STNoiseChunkGenerator<OverworldGenSettings
 
 	protected void fillNoiseColumn(double[] areaArrayIn, int x, int z)
 	{
-		this.setupPerlinNoiseGenerators(areaArrayIn, x, z, 20, 5680, 20, 42, 4, 3, -10);
+		this.setupPerlinNoiseGenerators(areaArrayIn, x, z, 100D, 6000D, 100D, 2.5D, 10D, 3, -10);
 	}
 
 

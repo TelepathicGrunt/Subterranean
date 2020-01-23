@@ -7,23 +7,16 @@ import net.telepathicgrunt.subterranean.world.biome.BiomeInit;
 
 
 @SuppressWarnings("deprecation")
-public enum StartingBiomesLayer implements IAreaTransformer0
+public enum WaterFloorLayer implements IAreaTransformer0
 {
 	INSTANCE;
 
-	private static final int CENTERAL_ISLES_BIOME = Registry.BIOME.getId(BiomeInit.CENTERAL_ISLES_BIOME);
 	private static final int WATER_FLOOR_BIOME = Registry.BIOME.getId(BiomeInit.WATER_FLOOR_BIOME);
 
 
 	public int apply(INoiseRandom noise, int x, int z)
 	{
-		if(noise.random(5) == 0)
-		{
-			return CENTERAL_ISLES_BIOME;
-		}else
-		{
-			return WATER_FLOOR_BIOME;
-		}
+		return WATER_FLOOR_BIOME;
 	}
 
 }

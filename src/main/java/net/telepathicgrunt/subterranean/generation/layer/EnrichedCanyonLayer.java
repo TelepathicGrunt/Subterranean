@@ -9,26 +9,28 @@ import net.telepathicgrunt.subterranean.world.biome.BiomeInit;
 
 
 @SuppressWarnings("deprecation")
-public enum BiomeDebugLayer implements IAreaTransformer0
+public enum EnrichedCanyonLayer implements IAreaTransformer0
 {
 	INSTANCE;
 
-	private static final int TEST_BIOME = Registry.BIOME.getId(BiomeInit.TEST_BIOME);
-	private static final int TEST_BIOME2 = Registry.BIOME.getId(BiomeInit.TEST_BIOME2);
+	private static final int ENRICHED_CANYON_BIOME = Registry.BIOME.getId(BiomeInit.ENRICHED_CANYON_BIOME);
+	private static final int WATER_FLOOR_BIOME = Registry.BIOME.getId(BiomeInit.WATER_FLOOR_BIOME);
 
 	private static PerlinNoiseGenerator perlinGen;
 
 	public int apply(INoiseRandom noise, int x, int z)
 	{
-		//double perlinNoise = perlinGen.noiseAt((double) x * 0.03D, (double)z * 0.03D, false) * 3;
+		double perlinNoise = perlinGen.noiseAt((double) x * 0.03D, (double)z * 0.03D, false) * 3;
 
-		if(noise.random(2) == 0)
+		if(Math.abs(perlinNoise)%1 < 0.25)
 		{
-			return TEST_BIOME;
-		}else
-		{
-			return TEST_BIOME2;
+			return WATER_FLOOR_BIOME;
 		}
+		else
+		{
+			return ENRICHED_CANYON_BIOME;
+		}
+		
 	}
 
 	public static void setSeed(long seed)

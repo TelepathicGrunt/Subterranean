@@ -26,7 +26,7 @@ public final class WaywardWallsBiome extends STBiome
 {
 	public WaywardWallsBiome()
 	{
-		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(GENERIC_SURFACE_BUILDER, GENERIC_SURFACE_CONFIG)).precipitation(Biome.RainType.NONE).category(Biome.Category.EXTREME_HILLS).depth(5.5F).scale(0.1F).temperature(0.3F).downfall(0.0F).waterColor(3093146).waterFogColor(2172035).parent((String) null));
+		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(PODZOL_SURFACE_BUILDER, STONE_ANDESITE_GRAVEL_SURFACE_CONFIG)).precipitation(Biome.RainType.NONE).category(Biome.Category.EXTREME_HILLS).depth(5.5F).scale(0.1F).temperature(0.3F).downfall(0.0F).waterColor(3093146).waterFogColor(2172035).parent((String) null));
 
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.configure(DefaultBiomeFeatures.DEAD_BUSH_CONFIG).createDecoratedFeature(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(2))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.field_227248_z_.configure(DefaultBiomeFeatures.GRASS_CONFIG).createDecoratedFeature(Placement.NOISE_HEIGHTMAP_DOUBLE.configure(new NoiseDependant(-0.8D, 5, 10))));

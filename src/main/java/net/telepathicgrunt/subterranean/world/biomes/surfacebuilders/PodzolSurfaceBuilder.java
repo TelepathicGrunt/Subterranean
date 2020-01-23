@@ -16,9 +16,9 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import net.telepathicgrunt.subterranean.world.biome.STBiome;
 
 
-public class GenericSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
+public class PodzolSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 {
-	public GenericSurfaceBuilder(Function<Dynamic<?>, ? extends SurfaceBuilderConfig> p_i51310_1_)
+	public PodzolSurfaceBuilder(Function<Dynamic<?>, ? extends SurfaceBuilderConfig> p_i51310_1_)
 	{
 		super(p_i51310_1_);
 	}
@@ -32,7 +32,7 @@ public class GenericSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 		int depthOfGravel = -1;
 
 		int heightOfLand = 0;
-		for (int ypos = 15; ypos <= 50; ++ypos)
+		for (int ypos = 15; ypos <= 250; ++ypos)
 		{
 			blockpos$Mutable.setPos(xpos, ypos, zpos);
 			BlockState iblockstate2 = chunkIn.getBlockState(blockpos$Mutable);
@@ -44,16 +44,20 @@ public class GenericSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 			}
 		}
 		
-		double noisemod = noise%2.0D;
+		double noisemod = Math.abs(noise%2.0D);
 		if(heightOfLand > 22)
 		{
-			if (noisemod < 1.0D)
+			if (noisemod < 0.3D)
 			{
-				SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, GRASS_DIRT_GRAVEL_CONFIG);
+				SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, PODZOL_DIRT_GRAVEL_CONFIG);
 			}
-			else if (noisemod < 1.3D || noisemod > 1.7D)
+			else if (noisemod < 0.6D || noisemod > 1.7)
 			{
 				SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, STBiome.COARSE_DIRT_ANDESITE_GRAVEL_CONFIG);
+			}
+			else if (noisemod < 0.9 || noisemod > 1.4)
+			{
+				SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, DIRT_DIRT_GRAVEL_CONFIG);
 			}
 			else
 			{

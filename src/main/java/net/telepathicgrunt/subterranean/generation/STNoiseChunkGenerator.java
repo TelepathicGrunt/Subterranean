@@ -33,6 +33,7 @@ import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
+import net.telepathicgrunt.subterranean.Subterranean;
 
 public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extends ChunkGenerator<T> {
 
@@ -66,14 +67,14 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 	protected final BlockState defaultBlock;
 	protected final BlockState defaultFluid;
 
-	public STNoiseChunkGenerator(IWorld p_i49931_1_, BiomeProvider p_i49931_2_, int horizontalNoiseGranularityIn, int verticalNoiseGranularityIn, int p_i49931_5_, T p_i49931_6_) {
+	public STNoiseChunkGenerator(IWorld p_i49931_1_, BiomeProvider p_i49931_2_, int horizontalNoiseGranularityIn, int verticalNoiseGranularityIn, int heightRange, T p_i49931_6_) {
 		super(p_i49931_1_, p_i49931_2_, p_i49931_6_);
 		this.verticalNoiseGranularity = verticalNoiseGranularityIn;
 		this.horizontalNoiseGranularity = horizontalNoiseGranularityIn;
 		this.defaultBlock = STONE;
 		this.defaultFluid = WATER;
 		this.noiseSizeX = 16 / this.horizontalNoiseGranularity;
-		this.noiseSizeY = p_i49931_5_ / this.verticalNoiseGranularity;
+		this.noiseSizeY = heightRange / this.verticalNoiseGranularity;
 		this.noiseSizeZ = 16 / this.horizontalNoiseGranularity;
 		this.randomSeed = new SharedSeedRandom(this.seed);
 		this.minNoise = new OctavesNoiseGenerator(this.randomSeed, 15, 0);
@@ -98,8 +99,8 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 			double mainZ = OctavesNoiseGenerator.maintainPrecision((double) z * getMainCoordinateScale * d3);
 			
 			double d7 = 684.412F * d3;
-			d0 += this.minNoise.getOctave(i).func_215456_a(limitX, limitY, limitZ, d7, (double) y * d7) / d3;
-			d1 += this.maxNoise.getOctave(i).func_215456_a(limitX, limitY, limitZ, d7, (double) y * d7) / d3;
+			d0 += this.minNoise.getOctave(i).func_215456_a(limitX, limitY, limitZ, d7, (double) y * d7) ;
+			d1 += this.maxNoise.getOctave(i).func_215456_a(limitX, limitY, limitZ, d7, (double) y * d7) ;
 			if (i < 8) {
 				d2 += this.mainNoise.getOctave(i).func_215456_a(mainX, mainY, mainZ, rangeMaybe * d3, (double) y * rangeMaybe * d3) / d3;
 			}
@@ -120,19 +121,20 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 		double[] localAreaArray = this.getBiomeNoiseColumn(x, z);
 		double nearbyArea1 = localAreaArray[0];
 		double nearbyArea2 = localAreaArray[1];
-		double d2 = this.func_222551_g();
-		double d3 = this.func_222553_h();
+		double maxHeight = this.maxheight();
+		double minHeight = this.minHeight();
 
 		for (int y = 0; y < this.noiseSizeY(); ++y) {
-			double d4 = this.internalSetupPerlinNoiseGenerators(x, y, z, getCoordinateScale, getHeightScale, getMainCoordinateScale, getMainHeightScale, rangeMaybe);
-			d4 = d4 - this.biomeHeightSmoother(nearbyArea1, nearbyArea2, y);
-			if ((double) y > d2) {
-				d4 = MathHelper.clampedLerp(d4, (double) lerpValue, ((double) y - d2) / (double) divisor);
-			} else if ((double) y < d3) {
-				d4 = MathHelper.clampedLerp(d4, -30.0D, (d3 - (double) y) / (d3 - 1.0D));
+			double valueAtY = this.internalSetupPerlinNoiseGenerators(x, y, z, getCoordinateScale, getHeightScale, getMainCoordinateScale, getMainHeightScale, rangeMaybe);
+			valueAtY = valueAtY - this.biomeHeightSmoother(nearbyArea1, nearbyArea2, y);
+			
+			if ((double) y > maxHeight) {
+				valueAtY = MathHelper.clampedLerp(valueAtY, (double) lerpValue, (double) y - maxHeight);
+			} else if ((double) y < minHeight) {
+				valueAtY = MathHelper.clampedLerp(valueAtY, -20000D, 0.000025D);
 			}
 
-			areaArrayIn[y] = d4;
+			areaArrayIn[y] = valueAtY;
 		}
 
 	}
@@ -141,12 +143,12 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 
 	protected abstract double biomeHeightSmoother(double p_222545_1_, double p_222545_3_, int p_222545_5_);
 
-	protected double func_222551_g() {
+	protected double maxheight() {
 		return (double) (this.noiseSizeY() - 4);
 	}
 
-	protected double func_222553_h() {
-		return 0.0D;
+	protected double minHeight() {
+		return 3.0D;
 	}
 
 	public int func_222529_a(int chunkX, int chunkZ, Heightmap.Type heightmapType) {

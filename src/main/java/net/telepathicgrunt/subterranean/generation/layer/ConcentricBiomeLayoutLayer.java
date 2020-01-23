@@ -14,21 +14,33 @@ public enum ConcentricBiomeLayoutLayer implements IAreaTransformer0
 	
 	public int apply(INoiseRandom noise, int x, int z)
 	{
-		int biomeID = 0;
-		double perlinNoise = perlinGen.noiseAt((double) x * 0.06D, (double)z * 0.06D, false) * 20;
+		double perlinNoise = perlinGen.noiseAt((double) x * 0.06D, (double)z * 0.06D, false) * 50;
 		float distanceSquared = x * x + z * z;
+		double scale = 0.5D;
 		
-//		if(distanceSquared <= 1600 + perlinNoise)
-//		{
-//			biomeID = StartingBiomesLayer.INSTANCE.apply(noise, x, z);
-//		}
-//		else 
-//		{
-//			biomeID = BiomeDebugLayer.INSTANCE.apply(noise, x, z);
-//		}
+		//how far out in blocks * scale so it matches in reality + noise to make edge wavy
+		
+		//0-400
+		if(distanceSquared <= 400 * scale + perlinNoise)
+		{
+			return StartingBiomesLayer.INSTANCE.apply(noise, x, z);
+		}
+		
+		//400-800
+		if(distanceSquared <= 800 * scale + perlinNoise)
+		{
+			return WaterFloorLayer.INSTANCE.apply(noise, x, z);
+		}
+		
+		//800-1600
+		if(distanceSquared <= 1600 * scale + perlinNoise)
+		{
+			return WaywardWallsLayer.INSTANCE.apply(noise, x, z);
+		}
+		
+		
+		return BiomeDebugLayer.INSTANCE.apply(noise, x, z);
 
-		biomeID = StartingBiomesLayer.INSTANCE.apply(noise, x, z);
-		return biomeID;
 	}
 
 	public static void setSeed(long seed)
