@@ -34,19 +34,19 @@ public class ThinAir extends Block
 		setRegistryName("thin_air");
 	}
 
-
+	@Override
 	public BlockRenderType getRenderType(BlockState blockState)
 	{
 		return BlockRenderType.INVISIBLE;
 	}
 
-
+	@Override
 	public VoxelShape getShape(BlockState blockState, IBlockReader blockReader, BlockPos blockPos, ISelectionContext context)
 	{
 		return VoxelShapes.empty();
 	}
 
-
+	@Override
 	public boolean isAir(BlockState blockState)
 	{
 		return true;
@@ -58,18 +58,19 @@ public class ThinAir extends Block
 	 * 
 	 * @deprecated prefer calling {@link IBlockState#getLightValue()}
 	 */
+	@Override
 	public int getLightValue(BlockState blockState)
 	{
 		return blockState.get(DISTANCE) < 25 ? (int)Math.ceil((25D-blockState.get(DISTANCE))*0.6D) : 0;
 	}
 
-
+	@Override
 	public void scheduledTick(BlockState blockState, ServerWorld serverWorld, BlockPos blockPos, Random random)
 	{
 		serverWorld.setBlockState(blockPos, updateDistance(blockState, serverWorld, blockPos), 3);
 	}
 
-
+	
 	private static BlockState updateDistance(BlockState blockState, IWorld world, BlockPos blockPos)
 	{
 		int currentDistance = 25;
@@ -90,19 +91,19 @@ public class ThinAir extends Block
 		return blockState.with(DISTANCE, Integer.valueOf(currentDistance));
 	}
 
-
+	
 	private static int getDistance(BlockState blockState)
 	{
 		return blockState.getBlock() instanceof ThinAir ? blockState.get(DISTANCE) : 25;
 	}
 
-
+	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> blockState)
 	{
 		blockState.add(DISTANCE);
 	}
 
-
+	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext blockState)
 	{
 		return updateDistance(this.getDefaultState(), blockState.getWorld(), blockState.getPos());
@@ -114,6 +115,7 @@ public class ThinAir extends Block
 	 * fences make their connections to the passed in state if possible, and wet concrete powder immediately returns its
 	 * solidified counterpart. Note that this method should ideally consider only the specific face passed in.
 	 */
+	@Override
 	public BlockState updatePostPlacement(BlockState blockState1, Direction direction, BlockState blockState2, IWorld world, BlockPos blockPos1, BlockPos blockPos2)
 	{
 		int i = getDistance(blockState2) + 1;

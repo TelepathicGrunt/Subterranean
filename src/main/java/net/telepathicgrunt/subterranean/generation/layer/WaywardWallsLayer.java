@@ -14,7 +14,7 @@ public enum WaywardWallsLayer implements IAreaTransformer0
 	private static final int WAYWARD_WALLS_BIOME = Registry.BIOME.getId(BiomeInit.WAYWARD_WALLS_BIOME);
 	private static final int WATER_FLOOR_BIOME = Registry.BIOME.getId(BiomeInit.WATER_FLOOR_BIOME);
 
-
+	@Override
 	public int apply(INoiseRandom noise, int x, int z)
 	{
 		if(noise.random(3) == 0)

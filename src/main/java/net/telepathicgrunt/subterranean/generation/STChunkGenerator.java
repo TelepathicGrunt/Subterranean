@@ -41,7 +41,7 @@ public class STChunkGenerator extends STNoiseChunkGenerator<OverworldGenSettings
 		this.depthNoise = new OctavesNoiseGenerator(this.randomSeed, 15, 0);
 	}
 
-
+	@Override
 	public void spawnMobs(WorldGenRegion region)
 	{
 		int i = region.getMainChunkX();
@@ -52,13 +52,13 @@ public class STChunkGenerator extends STNoiseChunkGenerator<OverworldGenSettings
 		WorldEntitySpawner.performWorldGenSpawning(region, biome, i, j, sharedseedrandom);
 	}
 
-
+	@Override
 	protected void fillNoiseColumn(double[] areaArrayIn, int x, int z)
 	{
 		this.setupPerlinNoiseGenerators(areaArrayIn, x, z, 100D, 6000D, 100D, 2.5D, 10D, 3, -10);
 	}
 
-
+	@Override
 	protected double biomeHeightSmoother(double nearbyArea1, double nearbyArea2, int y)
 	{
 		double heightMultipler = ((double) y - (8.5D + nearbyArea1 * 8.5D / 8.0D * 4.0D)) * 12.0D * 128.0D / 256.0D / nearbyArea2;
@@ -70,7 +70,7 @@ public class STChunkGenerator extends STNoiseChunkGenerator<OverworldGenSettings
 		return heightMultipler;
 	}
 
-
+	@Override
 	protected double[] getBiomeNoiseColumn(int noiseX, int noiseZ)
 	{
 		double[] adouble = new double[2];
@@ -136,21 +136,20 @@ public class STChunkGenerator extends STNoiseChunkGenerator<OverworldGenSettings
 		return noise;
 	}
 
-
+	@Override
 	public List<Biome.SpawnListEntry> getPossibleCreatures(EntityClassification creatureType, BlockPos pos)
 	{
 		return super.getPossibleCreatures(creatureType, pos);
 	}
 
-
+	@Override
 	public void spawnMobs(ServerWorld world, boolean spawnHostileMobs, boolean spawnPeacefulMobs)
 	{
 	}
 
-
+	@Override
 	public int getGroundHeight()
 	{
 		return getSeaLevel() + 1;
 	}
-
 }

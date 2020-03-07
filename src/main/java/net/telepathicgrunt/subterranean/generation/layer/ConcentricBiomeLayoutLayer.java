@@ -12,6 +12,7 @@ public enum ConcentricBiomeLayoutLayer implements IAreaTransformer0
 	
 	private static PerlinNoiseGenerator perlinGen;
 	
+	@Override
 	public int apply(INoiseRandom noise, int x, int z)
 	{
 		double perlinNoise = perlinGen.noiseAt((double) x * 0.06D, (double)z * 0.06D, false) * 50;

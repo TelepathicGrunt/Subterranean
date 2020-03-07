@@ -83,6 +83,7 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 		this.surfaceDepthNoise = (INoiseGenerator) (new PerlinNoiseGenerator(this.randomSeed, 3, 0));
 	}
 
+	
 	private double internalSetupPerlinNoiseGenerators(int x, int y, int z, double getCoordinateScale, double getHeightScale, double getMainCoordinateScale, double getMainHeightScale, double rangeMaybe) {
 		double d0 = 0.0D;
 		double d1 = 0.0D;
@@ -110,13 +111,13 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 
 		return MathHelper.clampedLerp(d0 / 512.0D, d1 / 512.0D, (d2 / 10.0D + 1.0D) / 2.0D);
 	}
-
+	
 	protected double[] func_222547_b(int p_222547_1_, int p_222547_2_) {
 		double[] adouble = new double[this.noiseSizeY + 1];
 		this.fillNoiseColumn(adouble, p_222547_1_, p_222547_2_);
 		return adouble;
 	}
-
+	
 	protected void setupPerlinNoiseGenerators(double[] areaArrayIn, int x, int z, double getCoordinateScale, double getHeightScale, double getMainCoordinateScale, double getMainHeightScale, double rangeMaybe, int divisor, int lerpValue) {
 		double[] localAreaArray = this.getBiomeNoiseColumn(x, z);
 		double nearbyArea1 = localAreaArray[0];
@@ -140,9 +141,9 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 	}
 
 	protected abstract double[] getBiomeNoiseColumn(int noiseX, int noiseZ);
-
+	
 	protected abstract double biomeHeightSmoother(double p_222545_1_, double p_222545_3_, int p_222545_5_);
-
+	
 	protected double maxheight() {
 		return (double) (this.noiseSizeY() - 4);
 	}
@@ -150,7 +151,8 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 	protected double minHeight() {
 		return 3.0D;
 	}
-
+	
+	@Override
 	public int func_222529_a(int chunkX, int chunkZ, Heightmap.Type heightmapType) {
 		int i = Math.floorDiv(chunkX, this.horizontalNoiseGranularity);
 		int j = Math.floorDiv(chunkZ, this.horizontalNoiseGranularity);
@@ -198,7 +200,8 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 	public int noiseSizeY() {
 		return this.noiseSizeY + 1;
 	}
-
+	
+	@Override
 	public void buildSurface(WorldGenRegion p_225551_1_, IChunk p_222535_1_) {
 		ChunkPos chunkpos = p_222535_1_.getPos();
 		int i = chunkpos.x;
@@ -249,7 +252,8 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 		}
 
 	}
-
+	
+	@Override
 	public void makeBase(IWorld p_222537_1_, IChunk p_222537_2_) {
 		ObjectList<AbstractVillagePiece> objectlist = new ObjectArrayList<>(10);
 		ObjectList<JigsawJunction> objectlist1 = new ObjectArrayList<>(32);

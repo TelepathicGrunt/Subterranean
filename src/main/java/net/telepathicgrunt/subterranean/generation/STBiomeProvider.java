@@ -96,7 +96,7 @@ public class STBiomeProvider extends BiomeProvider
 		return ImmutableList.of(layer, layer, layer);
 	}
 
-
+	@Override
 	public Set<Biome> getBiomesInArea(int centerX, int centerY, int centerZ, int sideLength)
 	{
 		int i = centerX - sideLength >> 2;
@@ -157,7 +157,7 @@ public class STBiomeProvider extends BiomeProvider
 		return blockpos;
 	}
 
-
+	@Override
 	public boolean hasStructure(Structure<?> structureIn)
 	{
 		return this.hasStructureCache.computeIfAbsent(structureIn, (p_205006_1_) ->
@@ -174,7 +174,7 @@ public class STBiomeProvider extends BiomeProvider
 		});
 	}
 
-
+	@Override
 	public Set<BlockState> getSurfaceBlocks()
 	{
 		if (this.topBlocksCache.isEmpty())
@@ -188,7 +188,7 @@ public class STBiomeProvider extends BiomeProvider
 		return this.topBlocksCache;
 	}
 
-
+	@Override
 	public Biome getBiomeForNoiseGen(int p_225526_1_, int p_225526_2_, int p_225526_3_)
 	{
 		return this.genBiomes.func_215738_a(p_225526_1_, p_225526_3_);
