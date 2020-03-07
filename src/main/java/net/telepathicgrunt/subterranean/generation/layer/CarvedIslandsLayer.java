@@ -14,13 +14,15 @@ public enum CarvedIslandsLayer implements IAreaTransformer0
 	private static final int CARVED_ISLANDS_BIOME = Registry.BIOME.getId(BiomeInit.CARVED_ISLANDS_BIOME);
 	private static final int CARVED_ISLANDS_WATER_FLOOR_BIOME = Registry.BIOME.getId(BiomeInit.CARVED_ISLANDS_WATER_FLOOR_BIOME);
 
+
 	@Override
 	public int apply(INoiseRandom noise, int x, int z)
 	{
-		if(noise.random(2) == 0)
+		if (noise.random(2) == 0)
 		{
 			return CARVED_ISLANDS_BIOME;
-		}else
+		}
+		else
 		{
 			return CARVED_ISLANDS_WATER_FLOOR_BIOME;
 		}

@@ -37,16 +37,16 @@ public class StoneSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 		{
 			blockpos$Mutable.setPos(xpos, ypos, zpos);
 			BlockState iblockstate2 = chunkIn.getBlockState(blockpos$Mutable);
-			
-			if(iblockstate2.getMaterial() == Material.AIR) 
+
+			if (iblockstate2.getMaterial() == Material.AIR)
 			{
 				heightOfLand = ypos - 1;
 				break;
 			}
 		}
-		
-		double noisemod = Math.abs(noise%1.0D);
-		if(heightOfLand > 22)
+
+		double noisemod = Math.abs(noise % 1.0D);
+		if (heightOfLand > 22)
 		{
 			if (noisemod < 0.2D)
 			{
@@ -65,7 +65,7 @@ public class StoneSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 				SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, STBiome.LIGHT_GRAY_CONCRETE_POWDER_ANDESITE_STONE_SURFACE_CONFIG);
 			}
 		}
-		else if(heightOfLand > 17)
+		else if (heightOfLand > 17)
 		{
 			SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, STBiome.COARSE_DIRT_ANDESITE_GRAVEL_CONFIG);
 		}
@@ -74,16 +74,16 @@ public class StoneSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 			SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, STBiome.GRAVEL_GRAVEL_STONE_SURFACE_CONFIG);
 		}
 
-
 		//makes stone below sea level - 3 into third config
-		for (int ypos = seaLevel-2; ypos >= 0; --ypos)
+		for (int ypos = seaLevel - 2; ypos >= 0; --ypos)
 		{
 			blockpos$Mutable.setPos(xpos, ypos, zpos);
 			BlockState iblockstate2 = chunkIn.getBlockState(blockpos$Mutable);
 
-			if(iblockstate2.getBlock() != null)
+			if (iblockstate2.getBlock() != null)
 			{
-				if (ypos < seaLevel-5) {
+				if (ypos < seaLevel - 5)
+				{
 					if (iblockstate2.isSolid())
 					{
 						if (depthOfGravel == -1)
@@ -102,8 +102,8 @@ public class StoneSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 						depthOfGravel = -1;
 					}
 				}
-				
-				if((iblockstate2 == Blocks.DIRT.getDefaultState() || iblockstate2 == Blocks.COARSE_DIRT.getDefaultState()))
+
+				if ((iblockstate2 == Blocks.DIRT.getDefaultState() || iblockstate2 == Blocks.COARSE_DIRT.getDefaultState()))
 				{
 					chunkIn.setBlockState(blockpos$Mutable, config.getUnderWaterMaterial(), false);
 				}
@@ -114,6 +114,7 @@ public class StoneSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 		STBiome.LARGE_STALACTITE_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, STBiome.STONE_STONE_STONE_SURFACE_CONFIG);
 		STBiome.SMALL_STALACTITE_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, STBiome.STONE_STONE_STONE_SURFACE_CONFIG);
 	}
+
 
 	@Override
 	public void setSeed(long seed)

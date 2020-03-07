@@ -9,11 +9,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.telepathicgrunt.subterranean.Subterranean;
 
-@EventBusSubscriber(modid=Subterranean.MODID, bus=Mod.EventBusSubscriber.Bus.FORGE)
+
+@EventBusSubscriber(modid = Subterranean.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class CapabilityEventHandler
 {
 	public static final ResourceLocation PLAYER_PAST_POS_AND_DIM = new ResourceLocation(Subterranean.MODID, "player_past_pos_and_dim");
-	
+
+
 	@SubscribeEvent
 	public static void onAttachCapabilitiesToEntities(AttachCapabilitiesEvent<Entity> e)
 	{

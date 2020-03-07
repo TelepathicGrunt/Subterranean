@@ -27,7 +27,7 @@ public final class CarvedIslandsWaterFloorBiome extends STBiome
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(PODZOL_SURFACE_BUILDER, STONE_ANDESITE_GRAVEL_SURFACE_CONFIG)).precipitation(Biome.RainType.NONE).category(Biome.Category.OCEAN).depth(-2.7F).scale(1F).temperature(0.3F).downfall(0.0F).waterColor(3093146).waterFogColor(2172035).parent((String) null));
 
 		this.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(STCarvers.SHELFSTONE_CARVER, new ProbabilityConfig(0.05F)));
-		
+
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.DISK.configure(new SphereReplaceConfig(COAL_ORE, 4, 2, Lists.newArrayList(STONE, GRAVEL, ANDESITE))).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(4, 5, 0, 24))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.DISK.configure(new SphereReplaceConfig(LIGHT_GRAY_CONCRETE, 4, 2, Lists.newArrayList(STONE, GRAVEL, ANDESITE))).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(2, 5, 0, 24))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.DISK.configure(new SphereReplaceConfig(CLAY, 4, 1, Lists.newArrayList(STONE, GRAVEL, ANDESITE))).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 5, 0, 24))));

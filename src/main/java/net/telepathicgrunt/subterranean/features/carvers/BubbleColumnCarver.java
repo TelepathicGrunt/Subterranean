@@ -111,9 +111,7 @@ public class BubbleColumnCarver extends CaveWorldCarver
 			return false;
 
 		Material material = blockState.getMaterial();
-		return ((material == Material.ROCK || material == Material.EARTH || material == Material.ORGANIC) && 
-				material != Material.WATER && 
-				material != Material.LAVA);
+		return ((material == Material.ROCK || material == Material.EARTH || material == Material.ORGANIC) && material != Material.WATER && material != Material.LAVA);
 	}
 
 }

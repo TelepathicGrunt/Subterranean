@@ -34,15 +34,14 @@ public class LargeStalactiteSurfaceBuilder extends SurfaceBuilder<SurfaceBuilder
 		double squareness = 1; //makes noise more cubic
 		double noiseScale = 0.0175D; //how much stepping in x and z we do at start. (lower number makes stalactites more stretched out horizontally) 
 		double differenceInScale = 0.0006D; //how much difference in scale between all the perlin generators.
-		
+
 		//how many iterations of perlin we do with scale for each offsetted by differenceInScale.
-		for(int i = 0; i < 5; i++)
+		for (int i = 0; i < 5; i++)
 		{
 			double perlinNoise = Math.abs(this.perlinGen.noiseAt(Math.floor(x / squareness) * squareness * (noiseScale - differenceInScale * i), Math.floor(z / squareness) * squareness * (noiseScale - differenceInScale * i), false));
 			heightNoise = Math.max(perlinNoise, heightNoise);
 		}
 		heightNoise = Math.ceil(heightNoise * 140.0D) + 130.0D; // * range of stalactites and + minimum height of stalactites. 
-		
 
 		int xInChunk = x & 15;
 		int zInChunk = z & 15;
@@ -51,7 +50,7 @@ public class LargeStalactiteSurfaceBuilder extends SurfaceBuilder<SurfaceBuilder
 		for (int y = 254; y >= heightNoise; --y)
 		{
 			blockpos$mutable.setPos(xInChunk, y, zInChunk);
-			
+
 			//only add out stalactites in air.
 			if (chunkIn.getBlockState(blockpos$mutable).getMaterial() == Material.AIR)
 			{

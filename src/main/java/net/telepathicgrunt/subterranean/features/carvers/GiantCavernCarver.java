@@ -61,7 +61,7 @@ public class GiantCavernCarver extends CaveWorldCarver
 		return true;
 	}
 
-	
+
 	protected void carveCave(IChunk chunk, Function<BlockPos, Biome> biomeFunction, long seed, int yChunk, int xChunk, int zChunk, double x, double y, double z, float caveRadius, double heightModifier, BitSet caveMask, boolean lavaBottom)
 	{
 		double finalRadius = 1.5D + MathHelper.sin(((float) Math.PI / 2F)) * caveRadius;
@@ -100,16 +100,16 @@ public class GiantCavernCarver extends CaveWorldCarver
 					double zInChunk = (zCord + 0.5D - z) / caveRadius;
 					AtomicBoolean atomicboolean = new AtomicBoolean(false);
 					bottom = false;
-					
+
 					for (int yPos = yMax; yPos > yMin; --yPos)
 					{
 						double yInChunk = (yPos + 0.5D - y) / heightModifier;
-						
+
 						if (!(xInChunk * xInChunk + zInChunk * zInChunk + yInChunk * yInChunk >= 1.0D))
 						{
-							if(yPos == yMin + 2) 
+							if (yPos == yMin + 2)
 							{
-								if(lavaBottom) 
+								if (lavaBottom)
 								{
 									bottom = true;
 								}

@@ -8,14 +8,16 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.telepathicgrunt.subterranean.RegUtil;
 import net.telepathicgrunt.subterranean.blocks.STBlocks;
 
+
 public class STCarvers
 {
 	public static final BlockState THIN_AIR = STBlocks.THIN_AIR.get().getDefaultState();
-	
-    public static WorldCarver<ProbabilityConfig> TEST_CARVER = new ShelfstoneCarver(ProbabilityConfig::deserialize);
-    public static WorldCarver<ProbabilityConfig> SHELFSTONE_CARVER = new ShelfstoneCarver(ProbabilityConfig::deserialize);
-    public static WorldCarver<ProbabilityConfig> BUBBLE_COLUMN_CARVER = new BubbleColumnCarver(ProbabilityConfig::deserialize);
-    public static WorldCarver<ProbabilityConfig> GIANT_CAVERN_CARVER = new GiantCavernCarver(ProbabilityConfig::deserialize);
+
+	public static WorldCarver<ProbabilityConfig> TEST_CARVER = new ShelfstoneCarver(ProbabilityConfig::deserialize);
+	public static WorldCarver<ProbabilityConfig> SHELFSTONE_CARVER = new ShelfstoneCarver(ProbabilityConfig::deserialize);
+	public static WorldCarver<ProbabilityConfig> BUBBLE_COLUMN_CARVER = new BubbleColumnCarver(ProbabilityConfig::deserialize);
+	public static WorldCarver<ProbabilityConfig> GIANT_CAVERN_CARVER = new GiantCavernCarver(ProbabilityConfig::deserialize);
+
 
 	public static void registerCarvers(RegistryEvent.Register<WorldCarver<?>> event)
 	{

@@ -92,9 +92,10 @@ public class STBiomeProvider extends BiomeProvider
 		layer = ZoomLayer.FUZZY.apply(contextFactory.apply(2000L), layer);
 		layer = ZoomLayer.NORMAL.apply((IExtendedNoiseRandom<T>) contextFactory.apply(1001L), layer);
 		layer = ZoomLayer.NORMAL.apply((IExtendedNoiseRandom<T>) contextFactory.apply(1001L), layer);
-		
+
 		return ImmutableList.of(layer, layer, layer);
 	}
+
 
 	@Override
 	public Set<Biome> getBiomesInArea(int centerX, int centerY, int centerZ, int sideLength)
@@ -157,6 +158,7 @@ public class STBiomeProvider extends BiomeProvider
 		return blockpos;
 	}
 
+
 	@Override
 	public boolean hasStructure(Structure<?> structureIn)
 	{
@@ -174,6 +176,7 @@ public class STBiomeProvider extends BiomeProvider
 		});
 	}
 
+
 	@Override
 	public Set<BlockState> getSurfaceBlocks()
 	{
@@ -187,6 +190,7 @@ public class STBiomeProvider extends BiomeProvider
 
 		return this.topBlocksCache;
 	}
+
 
 	@Override
 	public Biome getBiomeForNoiseGen(int p_225526_1_, int p_225526_2_, int p_225526_3_)

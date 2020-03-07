@@ -34,17 +34,20 @@ public class ThinAir extends Block
 		setRegistryName("thin_air");
 	}
 
+
 	@Override
 	public BlockRenderType getRenderType(BlockState blockState)
 	{
 		return BlockRenderType.INVISIBLE;
 	}
 
+
 	@Override
 	public VoxelShape getShape(BlockState blockState, IBlockReader blockReader, BlockPos blockPos, ISelectionContext context)
 	{
 		return VoxelShapes.empty();
 	}
+
 
 	@Override
 	public boolean isAir(BlockState blockState)
@@ -62,8 +65,9 @@ public class ThinAir extends Block
 	@Override
 	public int getLightValue(BlockState blockState)
 	{
-		return blockState.get(DISTANCE) < 25 ? (int)Math.ceil((25D-blockState.get(DISTANCE))*0.6D) : 0;
+		return blockState.get(DISTANCE) < 25 ? (int) Math.ceil((25D - blockState.get(DISTANCE)) * 0.6D) : 0;
 	}
+
 
 	@Override
 	public void scheduledTick(BlockState blockState, ServerWorld serverWorld, BlockPos blockPos, Random random)
@@ -71,7 +75,7 @@ public class ThinAir extends Block
 		serverWorld.setBlockState(blockPos, updateDistance(blockState, serverWorld, blockPos), 3);
 	}
 
-	
+
 	private static BlockState updateDistance(BlockState blockState, IWorld world, BlockPos blockPos)
 	{
 		int currentDistance = 25;
@@ -92,17 +96,19 @@ public class ThinAir extends Block
 		return blockState.with(DISTANCE, Integer.valueOf(currentDistance));
 	}
 
-	
+
 	private static int getDistance(BlockState blockState)
 	{
 		return blockState.getBlock() instanceof ThinAir ? blockState.get(DISTANCE) : 25;
 	}
+
 
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> blockState)
 	{
 		blockState.add(DISTANCE);
 	}
+
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext blockState)

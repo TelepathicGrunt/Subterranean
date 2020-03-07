@@ -21,6 +21,7 @@ import net.telepathicgrunt.subterranean.capabilities.CapabilityPlayerPosAndDim;
 import net.telepathicgrunt.subterranean.features.carvers.STCarvers;
 import net.telepathicgrunt.subterranean.world.biome.BiomeInit;
 
+
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Subterranean.MODID)
 public class Subterranean
@@ -28,23 +29,27 @@ public class Subterranean
 	public static final String MODID = "subterranean";
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 
-    public Subterranean() {
-        // Register the setup method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
-    }
+	public Subterranean()
+	{
+		// Register the setup method for modloading
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
-    private void setup(final FMLCommonSetupEvent event)
-    {
+		// Register ourselves for server and other game events we are interested in
+		MinecraftForge.EVENT_BUS.register(this);
+	}
+
+
+	private void setup(final FMLCommonSetupEvent event)
+	{
 		CapabilityPlayerPosAndDim.register();
-    }
+	}
 
-    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
-    // Event bus for receiving Registry Events)
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
+	// You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
+	// Event bus for receiving Registry Events)
+	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+	public static class RegistryEvents
+	{
 
 		@SubscribeEvent
 		public static void registerBiomes(final RegistryEvent.Register<Biome> event)
@@ -52,26 +57,28 @@ public class Subterranean
 			//registers all my modified biomes
 			BiomeInit.registerBiomes(event);
 		}
-		
+
+
 		/**
-		 * This method will be called by Forge when it is time for the mod to register its Blocks.
-		 * This method will always be called before the Item registry method.
-		 */
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) 
-        {
-        	STBlocks.registerBlocks(blockRegistryEvent);
-        }
-        
-		/**
-		 * This method will be called by Forge when it is time for the mod to register its Items.
-		 * This method will always be called after the Block registry method.
+		 * This method will be called by Forge when it is time for the mod to register its Blocks. This method will always be
+		 * called before the Item registry method.
 		 */
 		@SubscribeEvent
-		public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
-		//	BlocksInit.registerItems(event);
+		public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent)
+		{
+			STBlocks.registerBlocks(blockRegistryEvent);
 		}
-		
+
+
+		/**
+		 * This method will be called by Forge when it is time for the mod to register its Items. This method will always be
+		 * called after the Block registry method.
+		 */
+		@SubscribeEvent
+		public static void onRegisterItems(final RegistryEvent.Register<Item> event)
+		{
+			//	BlocksInit.registerItems(event);
+		}
 
 
 		/**
@@ -83,9 +90,9 @@ public class Subterranean
 			STCarvers.registerCarvers(event);
 			//LOGGER.log(Level.INFO, "carvers registered.");
 		}
-    }
-	
-    
+	}
+
+
 	/*
 	 * Helper method to quickly register features, blocks, items, structures, biomes, anything that can be registered.
 	 */

@@ -17,36 +17,44 @@ import net.telepathicgrunt.subterranean.Subterranean;
 
 
 @Mod.EventBusSubscriber(modid = Subterranean.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class STDimension {
+public class STDimension
+{
 
-	public static final ModDimension SUBTERRANEAN = new ModDimension() {
-        @Override
-        public BiFunction<World, DimensionType, ? extends Dimension> getFactory() {
-            return STWorldProvider::new;
-        }
-    };
+	public static final ModDimension SUBTERRANEAN = new ModDimension()
+	{
+		@Override
+		public BiFunction<World, DimensionType, ? extends Dimension> getFactory()
+		{
+			return STWorldProvider::new;
+		}
+	};
 
-    private static final ResourceLocation SUBTERRANEAN_ID = new ResourceLocation(Subterranean.MODID, "subterranean");
-	
-    
-    //registers the dimension
-    @Mod.EventBusSubscriber(modid = Subterranean.MODID)
-    private static class ForgeEvents {
-        @SubscribeEvent
-        public static void registerDimensions(RegisterDimensionsEvent event) {
-            if (DimensionType.byName(SUBTERRANEAN_ID) == null) {
-                DimensionManager.registerDimension(SUBTERRANEAN_ID, SUBTERRANEAN, null, true);
-            }
-        }
-    }
+	private static final ResourceLocation SUBTERRANEAN_ID = new ResourceLocation(Subterranean.MODID, "subterranean");
 
-    @SubscribeEvent
-    public static void registerModDimensions(RegistryEvent.Register<ModDimension> event) {
-        RegUtil.generic(event.getRegistry()).add("ultraamplified", SUBTERRANEAN);
-    }
-    
+	//registers the dimension
+	@Mod.EventBusSubscriber(modid = Subterranean.MODID)
+	private static class ForgeEvents
+	{
+		@SubscribeEvent
+		public static void registerDimensions(RegisterDimensionsEvent event)
+		{
+			if (DimensionType.byName(SUBTERRANEAN_ID) == null)
+			{
+				DimensionManager.registerDimension(SUBTERRANEAN_ID, SUBTERRANEAN, null, true);
+			}
+		}
+	}
 
-    public static DimensionType subterranean() {
-        return DimensionType.byName(SUBTERRANEAN_ID);
-    }
+
+	@SubscribeEvent
+	public static void registerModDimensions(RegistryEvent.Register<ModDimension> event)
+	{
+		RegUtil.generic(event.getRegistry()).add("ultraamplified", SUBTERRANEAN);
+	}
+
+
+	public static DimensionType subterranean()
+	{
+		return DimensionType.byName(SUBTERRANEAN_ID);
+	}
 }

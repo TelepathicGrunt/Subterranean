@@ -21,7 +21,7 @@ import net.telepathicgrunt.subterranean.world.biome.STBiome;
 
 
 public final class CarvedIslandsBiome extends STBiome
-{	
+{
 	public CarvedIslandsBiome()
 	{
 		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(STONE_SURFACE_BUILDER, STONE_ANDESITE_GRAVEL_SURFACE_CONFIG)).precipitation(Biome.RainType.NONE).category(Biome.Category.PLAINS).depth(0.1F).scale(0.5F).temperature(0.3F).downfall(0.0F).waterColor(3093146).waterFogColor(2172035).parent((String) null));
@@ -41,7 +41,7 @@ public final class CarvedIslandsBiome extends STBiome
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, GRANITE, 50)).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(5, 10, 0, 80))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, DIORITE, 33)).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(4, 10, 0, 80))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ANDESITE, 33)).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(4, 10, 0, 80))));
-		
+
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.SPRING_FEATURE.configure(DefaultBiomeFeatures.WATER_SPRING_CONFIG).createDecoratedFeature(Placement.COUNT_BIASED_RANGE.configure(new CountRangeConfig(25, 24, 0, 50))));
 		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Feature.SPRING_FEATURE.configure(DefaultBiomeFeatures.LAVA_SPRING_CONFIG).createDecoratedFeature(Placement.COUNT_VERY_BIASED_RANGE.configure(new CountRangeConfig(5, 24, 0, 50))));
 

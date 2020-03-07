@@ -18,19 +18,22 @@ public enum BiomeDebugLayer implements IAreaTransformer0
 
 	private static PerlinNoiseGenerator perlinGen;
 
+
 	@Override
 	public int apply(INoiseRandom noise, int x, int z)
 	{
 		//double perlinNoise = perlinGen.noiseAt((double) x * 0.03D, (double)z * 0.03D, false) * 3;
 
-		if(noise.random(2) == 0)
+		if (noise.random(2) == 0)
 		{
 			return TEST_BIOME;
-		}else
+		}
+		else
 		{
 			return TEST_BIOME2;
 		}
 	}
+
 
 	public static void setSeed(long seed)
 	{

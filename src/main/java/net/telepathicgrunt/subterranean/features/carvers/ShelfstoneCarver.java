@@ -50,7 +50,7 @@ public class ShelfstoneCarver extends CaveWorldCarver
 
 		float caveRadius = 10.0F + random.nextFloat() * 13.0F; // How thick the cave is
 		this.carveCave(chunk, biomeFunction, random.nextLong(), unusedInt1, unusedInt2, unusedInt3, x, y, z, caveRadius + random.nextFloat() * 10, caveRadius + random.nextFloat() * 10, random.nextFloat() * 0.4F + 0.6F, caveMask);
-	
+
 		return true;
 	}
 
@@ -94,7 +94,7 @@ public class ShelfstoneCarver extends CaveWorldCarver
 		return (material == Material.SAND || material == Material.ROCK || material == Material.EARTH || material == Material.ORGANIC) && material != Material.LAVA && aboveMaterial != Material.LAVA;
 	}
 
-	
+
 	protected void carveCave(IChunk chunk, Function<BlockPos, Biome> biomeFunction, long seed, int yChunk, int xChunk, int zChunk, double x, double y, double z, double caveRadiusX, double caveRadiusZ, double heightModifier, BitSet caveMask)
 	{
 		double finalRadiusX = 1.5D + MathHelper.sin(((float) Math.PI / 2F)) * caveRadiusX;
@@ -102,6 +102,7 @@ public class ShelfstoneCarver extends CaveWorldCarver
 		double finalHeight = ((finalRadiusX + finalRadiusZ) * 0.5D) * heightModifier;
 		this.carveRegion(chunk, biomeFunction, seed, yChunk, xChunk, zChunk, x + 1.0D, y, z, finalRadiusX, finalRadiusZ, finalHeight, caveMask);
 	}
+
 
 	protected boolean carveRegion(IChunk chunk, Function<BlockPos, Biome> biomeFunction, long seed, int yChunk, int xChunk, int zChunk, double x, double y, double z, double caveRadiusX, double caveRadiusZ, double heightModifier, BitSet caveMask)
 	{
@@ -131,11 +132,11 @@ public class ShelfstoneCarver extends CaveWorldCarver
 					int zCord = zPos + zChunk * 16;
 					double zInChunk = (zCord + 0.5D - z) / caveRadiusZ;
 					AtomicBoolean atomicboolean = new AtomicBoolean(false);
-					
+
 					for (int yPos = yMax; yPos > yMin; --yPos)
 					{
 						double yInChunk = (yPos + 0.5D - y) / heightModifier;
-						
+
 						if (!(xInChunk * xInChunk + zInChunk * zInChunk + yInChunk * yInChunk >= 1.0D))
 						{
 							flag |= this.carveAtPoint(chunk, biomeFunction, caveMask, random, blockpos$mutable, blockpos$mutable1, blockpos$mutable2, yChunk, xChunk, zChunk, xCord, zCord, xPos, yPos, zPos, atomicboolean);

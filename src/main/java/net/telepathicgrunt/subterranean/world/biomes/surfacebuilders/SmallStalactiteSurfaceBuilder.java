@@ -32,12 +32,12 @@ public class SmallStalactiteSurfaceBuilder extends SurfaceBuilder<SurfaceBuilder
 	{
 		double heightNoise = 0.0D;
 		double squareness = 1;  //makes noise more cubic
-		
+
 		//Uses abs to make sharp peaks in the noise. Utilizies inputNoise to make regions that are bare in stalactites
 		//this noise makes the stalactites.
 		double perlinNoise1 = Math.abs(Math.min(Math.abs(inputNoise), Math.abs(this.perlinGen.noiseAt(Math.floor(x / squareness) * squareness * 0.06D, Math.floor(z / squareness) * squareness * 0.06D, false))));
-		
-		double sharpNoise = ((perlinNoise1 * perlinNoise1)*0.7+0.3D) * Math.abs(inputNoise/3.1); // Makes noise even sharper.
+
+		double sharpNoise = ((perlinNoise1 * perlinNoise1) * 0.7 + 0.3D) * Math.abs(inputNoise / 3.1); // Makes noise even sharper.
 		heightNoise = Math.ceil((1 - sharpNoise) * 140.0D) + 130.0D; // * range of stalactites and + minimum height of stalactites. 
 
 		//Uses abs to make sharp peaks in the noise.
@@ -48,7 +48,7 @@ public class SmallStalactiteSurfaceBuilder extends SurfaceBuilder<SurfaceBuilder
 		{
 			heightNoise = maxCap;
 		}
-		
+
 		int xInChunk = x & 15;
 		int zInChunk = z & 15;
 		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
@@ -56,7 +56,7 @@ public class SmallStalactiteSurfaceBuilder extends SurfaceBuilder<SurfaceBuilder
 		for (int y = 254; y >= heightNoise; --y)
 		{
 			blockpos$mutable.setPos(xInChunk, y, zInChunk);
-			
+
 			//only add out stalactites in air.
 			if (chunkIn.getBlockState(blockpos$mutable).getMaterial() == Material.AIR)
 			{

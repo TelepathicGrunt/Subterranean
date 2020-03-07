@@ -18,12 +18,13 @@ public enum EnrichedCanyonLayer implements IAreaTransformer0
 
 	private static PerlinNoiseGenerator perlinGen;
 
+
 	@Override
 	public int apply(INoiseRandom noise, int x, int z)
 	{
 		double perlinNoise = perlinGen.noiseAt(x * 0.03D, z * 0.03D, false) * 3;
 
-		if(Math.abs(perlinNoise)%1 < 0.25)
+		if (Math.abs(perlinNoise) % 1 < 0.25)
 		{
 			return WATER_FLOOR_BIOME;
 		}
@@ -31,8 +32,9 @@ public enum EnrichedCanyonLayer implements IAreaTransformer0
 		{
 			return ENRICHED_CANYON_BIOME;
 		}
-		
+
 	}
+
 
 	public static void setSeed(long seed)
 	{
