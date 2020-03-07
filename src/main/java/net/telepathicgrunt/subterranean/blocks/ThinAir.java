@@ -7,6 +7,7 @@ import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
@@ -18,12 +19,14 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 
 public class ThinAir extends Block
 {
 
+	private static final VoxelShape ENTITY_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 	public static final IntegerProperty DISTANCE = BlockStateProperties.AGE_0_25;
 
 
@@ -46,6 +49,16 @@ public class ThinAir extends Block
 	public VoxelShape getShape(BlockState blockState, IBlockReader blockReader, BlockPos blockPos, ISelectionContext context)
 	{
 		return VoxelShapes.empty();
+	}
+
+
+	@Override
+	public void onEntityCollision(BlockState blockState, World world, BlockPos blockPos, Entity entity)
+	{
+		if (!world.isRemote)
+		{
+			
+		}
 	}
 
 
@@ -132,5 +145,12 @@ public class ThinAir extends Block
 		}
 
 		return blockState1;
+	}
+
+
+	@Override
+	public VoxelShape getCollisionShape(BlockState p_220071_1_, IBlockReader p_220071_2_, BlockPos p_220071_3_, ISelectionContext p_220071_4_)
+	{
+		return ENTITY_SHAPE;
 	}
 }
