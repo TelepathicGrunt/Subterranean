@@ -12,7 +12,7 @@ public class STBlocks
 {
 	public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Subterranean.MODID);
 
-	public static final RegistryObject<Block> THIN_AIR = BLOCKS.register("thin_air", () -> new ThinAir());
+	//public static final RegistryObject<Block> THIN_AIR = BLOCKS.register("thin_air", () -> new ThinAir());
 
 
 	/**
@@ -22,6 +22,6 @@ public class STBlocks
 	 */
 	public static void registerBlocks(RegistryEvent.Register<Block> event)
 	{
-		event.getRegistry().registerAll(new ThinAir());
+		//event.getRegistry().registerAll(new ThinAir());
 	}
 }

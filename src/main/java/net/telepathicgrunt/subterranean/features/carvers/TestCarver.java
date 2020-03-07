@@ -157,7 +157,7 @@ public class TestCarver extends CaveWorldCarver
 		}
 		else  // carves air when above lava level
 		{
-			chunk.setBlockState(posHere, STCarvers.THIN_AIR, false);
+			chunk.setBlockState(posHere, STCarvers.AIR, false);
 		}
 
 		return true;

@@ -27,7 +27,7 @@ import net.minecraft.world.gen.PerlinNoiseGenerator;
 import net.minecraft.world.gen.WorldGenRegion;
 import net.minecraft.world.gen.feature.jigsaw.JigsawJunction;
 import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
-import net.telepathicgrunt.subterranean.blocks.STBlocks;
+import net.telepathicgrunt.subterranean.features.carvers.STCarvers;
 
 
 public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extends ChunkGenerator<T>
@@ -35,7 +35,6 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 
 	private static final BlockState STONE = Blocks.STONE.getDefaultState();
 	private static final BlockState WATER = Blocks.WATER.getDefaultState();
-	private static final BlockState AIR = STBlocks.THIN_AIR.get().getDefaultState();
 
 	private static final float[] field_222561_h = Util.make(new float[13824], (p_222557_0_) ->
 	{
@@ -455,10 +454,10 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 								}
 								else
 								{
-									blockstate = AIR;
+									blockstate = STCarvers.AIR;
 								}
 
-								if (blockstate != AIR)
+								if (blockstate != STCarvers.AIR)
 								{
 									if (blockstate.getLightValue() != 0)
 									{

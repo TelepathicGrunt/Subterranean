@@ -90,7 +90,7 @@ public class BubbleColumnCarver extends CaveWorldCarver
 
 		if (y > 10) // carves air when above lava level
 		{
-			chunk.setBlockState(posHere, STCarvers.THIN_AIR, false);
+			chunk.setBlockState(posHere, STCarvers.AIR, false);
 		}
 		else // sets lava below lava level
 		{
