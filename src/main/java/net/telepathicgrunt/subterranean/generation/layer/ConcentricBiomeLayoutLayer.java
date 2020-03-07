@@ -40,6 +40,12 @@ public enum ConcentricBiomeLayoutLayer implements IAreaTransformer0
 			return WaywardWallsLayer.INSTANCE.apply(noise, x, z);
 		}
 
+		//1600-2000
+		if (distanceSquared <= 2000 * scale + perlinNoise)
+		{
+			return CarvedIslandsLayer.INSTANCE.apply(noise, x, z);
+		}
+
 		return BiomeDebugLayer.INSTANCE.apply(noise, x, z);
 
 	}
