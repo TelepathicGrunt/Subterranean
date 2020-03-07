@@ -26,7 +26,8 @@ public class STPortalFrame extends Feature<NoFeatureConfig> {
    }
 
    //need to be made due to extending feature
-   public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+   @Override
+public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 	   return false;
    }
    

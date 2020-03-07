@@ -65,7 +65,7 @@ public class STBiomeProvider extends BiomeProvider
 
 		for (int i = 0; i < count; ++i)
 		{
-			iareafactory = parent.apply(contextFactory.apply(seed + (long) i), iareafactory);
+			iareafactory = parent.apply(contextFactory.apply(seed + i), iareafactory);
 		}
 
 		return iareafactory;

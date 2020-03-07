@@ -15,7 +15,7 @@ public enum ConcentricBiomeLayoutLayer implements IAreaTransformer0
 	@Override
 	public int apply(INoiseRandom noise, int x, int z)
 	{
-		double perlinNoise = perlinGen.noiseAt((double) x * 0.06D, (double)z * 0.06D, false) * 50;
+		double perlinNoise = perlinGen.noiseAt(x * 0.06D, z * 0.06D, false) * 50;
 		float distanceSquared = x * x + z * z;
 		double scale = 0.5D;
 		

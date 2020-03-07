@@ -48,9 +48,9 @@ public class BubbleColumnCarver extends CaveWorldCarver
 
 		for (int roomCount = 0; roomCount < numberOfRooms; ++roomCount)
 		{
-			double x = (double) (xChunk1 * 16);// + random.nextInt(16));   // Uncomment to randomizes spot of each room
+			double x = xChunk1 * 16;// + random.nextInt(16));   // Uncomment to randomizes spot of each room
 			double y = (double) this.generateCaveStartY(random) - roomCount * 20;  // Lowers each room/sphere by 20 blocks so they are stacked
-			double z = (double) (zChunk1 * 16); //+ random.nextInt(16));   // Uncomment to randomizes spot of each room
+			double z = zChunk1 * 16; //+ random.nextInt(16));   // Uncomment to randomizes spot of each room
 
 			float caveRadius = 20.0F + random.nextFloat() * 10.0F; // How big the cave sphere is (radius)
 

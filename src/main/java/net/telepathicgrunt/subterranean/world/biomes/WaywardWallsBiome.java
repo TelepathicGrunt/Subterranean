@@ -48,6 +48,7 @@ public final class WaywardWallsBiome extends STBiome
 	/*
 	 * Set sky color
 	 */
+	@Override
 	@OnlyIn(Dist.CLIENT)
 	public int getSkyColor()
 	{

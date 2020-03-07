@@ -58,6 +58,7 @@ public class ThinAir extends Block
 	 * 
 	 * @deprecated prefer calling {@link IBlockState#getLightValue()}
 	 */
+	@Deprecated
 	@Override
 	public int getLightValue(BlockState blockState)
 	{

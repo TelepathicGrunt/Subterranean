@@ -24,6 +24,7 @@ public class StoneSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 	}
 
 
+	@Override
 	public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config)
 	{
 		int xpos = x & 15;
@@ -114,6 +115,7 @@ public class StoneSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 		STBiome.SMALL_STALACTITE_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, STBiome.STONE_STONE_STONE_SURFACE_CONFIG);
 	}
 
+	@Override
 	public void setSeed(long seed)
 	{
 		STBiome.LARGE_STALACTITE_SURFACE_BUILDER.setSeed(seed);

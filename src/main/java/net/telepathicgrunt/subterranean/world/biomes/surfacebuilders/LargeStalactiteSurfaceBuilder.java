@@ -27,6 +27,7 @@ public class LargeStalactiteSurfaceBuilder extends SurfaceBuilder<SurfaceBuilder
 	}
 
 
+	@Override
 	public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double inputNoise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config)
 	{
 		double heightNoise = 0.0D;
@@ -37,7 +38,7 @@ public class LargeStalactiteSurfaceBuilder extends SurfaceBuilder<SurfaceBuilder
 		//how many iterations of perlin we do with scale for each offsetted by differenceInScale.
 		for(int i = 0; i < 5; i++)
 		{
-			double perlinNoise = Math.abs(this.perlinGen.noiseAt((double) Math.floor(x / squareness) * squareness * (noiseScale - differenceInScale * i), (double) Math.floor(z / squareness) * squareness * (noiseScale - differenceInScale * i), false));
+			double perlinNoise = Math.abs(this.perlinGen.noiseAt(Math.floor(x / squareness) * squareness * (noiseScale - differenceInScale * i), Math.floor(z / squareness) * squareness * (noiseScale - differenceInScale * i), false));
 			heightNoise = Math.max(perlinNoise, heightNoise);
 		}
 		heightNoise = Math.ceil(heightNoise * 140.0D) + 130.0D; // * range of stalactites and + minimum height of stalactites. 
@@ -63,6 +64,7 @@ public class LargeStalactiteSurfaceBuilder extends SurfaceBuilder<SurfaceBuilder
 	/*
 	 * Sets up the perlin generator with the world seed.
 	 */
+	@Override
 	public void setSeed(long seed)
 	{
 		if (this.perlinGen == null)

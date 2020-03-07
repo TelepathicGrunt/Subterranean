@@ -47,6 +47,7 @@ public final class CenteralIslesBiome extends STBiome
 	/*
 	 * Set sky color
 	 */
+	@Override
 	@OnlyIn(Dist.CLIENT)
 	public int getSkyColor()
 	{

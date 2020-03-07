@@ -27,6 +27,7 @@ public class SmallStalactiteSurfaceBuilder extends SurfaceBuilder<SurfaceBuilder
 	}
 
 
+	@Override
 	public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double inputNoise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config)
 	{
 		double heightNoise = 0.0D;
@@ -34,14 +35,14 @@ public class SmallStalactiteSurfaceBuilder extends SurfaceBuilder<SurfaceBuilder
 		
 		//Uses abs to make sharp peaks in the noise. Utilizies inputNoise to make regions that are bare in stalactites
 		//this noise makes the stalactites.
-		double perlinNoise1 = Math.abs(Math.min(Math.abs(inputNoise), Math.abs(this.perlinGen.noiseAt((double) Math.floor(x / squareness) * squareness * 0.06D, (double) Math.floor(z / squareness) * squareness * 0.06D, false))));
+		double perlinNoise1 = Math.abs(Math.min(Math.abs(inputNoise), Math.abs(this.perlinGen.noiseAt(Math.floor(x / squareness) * squareness * 0.06D, Math.floor(z / squareness) * squareness * 0.06D, false))));
 		
 		double sharpNoise = ((perlinNoise1 * perlinNoise1)*0.7+0.3D) * Math.abs(inputNoise/3.1); // Makes noise even sharper.
 		heightNoise = Math.ceil((1 - sharpNoise) * 140.0D) + 130.0D; // * range of stalactites and + minimum height of stalactites. 
 
 		//Uses abs to make sharp peaks in the noise.
 		//This noise covers the Bedrock ceiling so it is not exposed
-		double perlinNoise2 = Math.abs(this.perlinGen.noiseAt((double) Math.floor(x / squareness) * squareness * 0.1D, (double) Math.floor(z / squareness) * squareness * 0.1D, false));
+		double perlinNoise2 = Math.abs(this.perlinGen.noiseAt(Math.floor(x / squareness) * squareness * 0.1D, Math.floor(z / squareness) * squareness * 0.1D, false));
 		double maxCap = Math.ceil(perlinNoise2 * 3D) + 248D; // Hovers around y = 248.
 		if (heightNoise > maxCap) // heightNoise cannot get to Bedrock Ceiling
 		{
@@ -65,6 +66,7 @@ public class SmallStalactiteSurfaceBuilder extends SurfaceBuilder<SurfaceBuilder
 	}
 
 
+	@Override
 	public void setSeed(long seed)
 	{
 		if (this.perlinGen == null)

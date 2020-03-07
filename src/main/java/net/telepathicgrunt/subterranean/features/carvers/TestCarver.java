@@ -50,9 +50,9 @@ public class TestCarver extends CaveWorldCarver
 	@Override
 	public boolean carve(IChunk chunk, Function<BlockPos, Biome> biomeFunction, Random random, int yChunk, int xChunk, int zChunk, int xChunk2, int zChunk2, BitSet caveMask, ProbabilityConfig chanceConfig)
 	{
-		double x = (double) (xChunk * 16);// + random.nextInt(16));   // Randomizes spot of each room
-		double y = (double) this.generateCaveStartY(random);  // 
-		double z = (double) (zChunk * 16); //+ random.nextInt(16));   // Randomizes spot of each room
+		double x = xChunk * 16;// + random.nextInt(16));   // Randomizes spot of each room
+		double y = this.generateCaveStartY(random);  // 
+		double z = zChunk * 16; //+ random.nextInt(16));   // Randomizes spot of each room
 
 		float caveRadius = 31.5F + random.nextFloat() * 15.0F; // How thick the cave is
 		boolean lavaBottom = random.nextFloat() < 0.4F;
@@ -64,7 +64,7 @@ public class TestCarver extends CaveWorldCarver
 	
 	protected void carveCave(IChunk chunk, Function<BlockPos, Biome> biomeFunction, long seed, int yChunk, int xChunk, int zChunk, double x, double y, double z, float caveRadius, double heightModifier, BitSet caveMask, boolean lavaBottom)
 	{
-		double finalRadius = 1.5D + (double) (MathHelper.sin(((float) Math.PI / 2F)) * caveRadius);
+		double finalRadius = 1.5D + MathHelper.sin(((float) Math.PI / 2F)) * caveRadius;
 		double finalHeight = finalRadius * heightModifier;
 		this.carveRegion(chunk, biomeFunction, seed, yChunk, xChunk, zChunk, x + 1.0D, y, z, finalRadius, finalHeight, caveMask, lavaBottom);
 	}
@@ -72,9 +72,9 @@ public class TestCarver extends CaveWorldCarver
 
 	protected boolean carveRegion(IChunk chunk, Function<BlockPos, Biome> biomeFunction, long seed, int yChunk, int xChunk, int zChunk, double x, double y, double z, double caveRadius, double heightModifier, BitSet caveMask, boolean lavaBottom)
 	{
-		Random random = new Random(seed + (long) xChunk + (long) zChunk);
-		double trueX = (double) (xChunk * 16 + 8);
-		double trueZ = (double) (zChunk * 16 + 8);
+		Random random = new Random(seed + xChunk + zChunk);
+		double trueX = xChunk * 16 + 8;
+		double trueZ = zChunk * 16 + 8;
 		boolean bottom = false;
 		if (!(x < trueX - 16.0D - caveRadius * 2.0D) && !(z < trueZ - 16.0D - caveRadius * 2.0D) && !(x > trueX + 16.0D + caveRadius * 2.0D) && !(z > trueZ + 16.0D + caveRadius * 2.0D))
 		{
@@ -92,18 +92,18 @@ public class TestCarver extends CaveWorldCarver
 			for (int xPos = xMin; xPos < xMax; ++xPos)
 			{
 				int xCord = xPos + xChunk * 16;
-				double xInChunk = ((double) xCord + 0.5D - x) / caveRadius;
+				double xInChunk = (xCord + 0.5D - x) / caveRadius;
 
 				for (int zPos = zMin; zPos < zMax; ++zPos)
 				{
 					int zCord = zPos + zChunk * 16;
-					double zInChunk = ((double) zCord + 0.5D - z) / caveRadius;
+					double zInChunk = (zCord + 0.5D - z) / caveRadius;
 					AtomicBoolean atomicboolean = new AtomicBoolean(false);
 					bottom = false;
 					
 					for (int yPos = yMax; yPos > yMin; --yPos)
 					{
-						double yInChunk = ((double) yPos + 0.5D - y) / heightModifier;
+						double yInChunk = (yPos + 0.5D - y) / heightModifier;
 						
 						if (!(xInChunk * xInChunk + zInChunk * zInChunk + yInChunk * yInChunk >= 1.0D))
 						{

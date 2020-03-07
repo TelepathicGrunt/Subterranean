@@ -26,7 +26,7 @@ public class STChunkGenerator extends STNoiseChunkGenerator<OverworldGenSettings
 		{
 			for (int j = -2; j <= 2; ++j)
 			{
-				float f = 10.0F / MathHelper.sqrt((float) (i * i + j * j) + 0.2F);
+				float f = 10.0F / MathHelper.sqrt(i * i + j * j + 0.2F);
 				p_222575_0_[i + 2 + (j + 2) * 5] = f;
 			}
 		}
@@ -61,7 +61,7 @@ public class STChunkGenerator extends STNoiseChunkGenerator<OverworldGenSettings
 	@Override
 	protected double biomeHeightSmoother(double nearbyArea1, double nearbyArea2, int y)
 	{
-		double heightMultipler = ((double) y - (8.5D + nearbyArea1 * 8.5D / 8.0D * 4.0D)) * 12.0D * 128.0D / 256.0D / nearbyArea2;
+		double heightMultipler = (y - (8.5D + nearbyArea1 * 8.5D / 8.0D * 4.0D)) * 12.0D * 128.0D / 256.0D / nearbyArea2;
 		if (heightMultipler < 0.0D)
 		{
 			heightMultipler *= 0.15D; // lower this constant for sharper biome edges and increase for smoother biome edges
@@ -104,15 +104,15 @@ public class STChunkGenerator extends STNoiseChunkGenerator<OverworldGenSettings
 		f1 = f1 / f2;
 		f = f * 1.0F + 0.1F;
 		f1 = (f1 * 4.0F - 1.0F) / 8.0F;
-		adouble[0] = (double) f1 + this.getNoiseDepthAt(noiseX, noiseZ);
-		adouble[1] = (double) f;
+		adouble[0] = f1 + this.getNoiseDepthAt(noiseX, noiseZ);
+		adouble[1] = f;
 		return adouble;
 	}
 
 
 	private double getNoiseDepthAt(int p_222574_1_, int p_222574_2_)
 	{
-		double noise = this.depthNoise.getValue((double) (p_222574_1_ * 200), 10.0D, (double) (p_222574_2_ * 200), 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
+		double noise = this.depthNoise.getValue(p_222574_1_ * 200, 10.0D, p_222574_2_ * 200, 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
 		if (noise < 0.0D)
 		{
 			noise = -noise * 0.3D;

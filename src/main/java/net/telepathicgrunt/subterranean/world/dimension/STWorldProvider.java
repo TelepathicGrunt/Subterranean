@@ -39,7 +39,7 @@ public class STWorldProvider extends Dimension
 			}
 			else
 			{
-				this.lightBrightnessTable[i] = (float) i / 20.0F;
+				this.lightBrightnessTable[i] = i / 20.0F;
 			}
 		}
 	}
@@ -75,6 +75,7 @@ public class STWorldProvider extends Dimension
 	}
 
 
+	@Override
 	@OnlyIn(Dist.CLIENT)
 	public boolean isSkyColored()
 	{
@@ -82,6 +83,7 @@ public class STWorldProvider extends Dimension
 	}
 
 
+	@Override
 	public boolean hasSkyLight()
 	{
 		return false;
@@ -118,6 +120,7 @@ public class STWorldProvider extends Dimension
 	/**
 	 * Returns array with sunrise/sunset colors
 	 */
+	@Override
 	@Nullable
 	@OnlyIn(Dist.CLIENT)
 	public float[] calcSunriseSunsetColors(float p_76560_1_, float p_76560_2_)
@@ -129,6 +132,7 @@ public class STWorldProvider extends Dimension
 	/**
 	 * the y level at which clouds are rendered.
 	 */
+	@Override
 	@OnlyIn(Dist.CLIENT)
 	public float getCloudHeight()
 	{
@@ -143,6 +147,7 @@ public class STWorldProvider extends Dimension
 	}
 
 
+	@Override
 	public boolean isNether()
 	{
 		return false;
@@ -167,6 +172,7 @@ public class STWorldProvider extends Dimension
 	 * Returns a double value representing the Y value relative to the top of the map at which void fog is at its maximum.
 	 * for example, means the void fog will be at its maximum at 256 here.
 	 */
+	@Override
 	@OnlyIn(Dist.CLIENT)
 	public double getVoidFogYFactor()
 	{

@@ -21,7 +21,7 @@ public enum EnrichedCanyonLayer implements IAreaTransformer0
 	@Override
 	public int apply(INoiseRandom noise, int x, int z)
 	{
-		double perlinNoise = perlinGen.noiseAt((double) x * 0.03D, (double)z * 0.03D, false) * 3;
+		double perlinNoise = perlinGen.noiseAt(x * 0.03D, z * 0.03D, false) * 3;
 
 		if(Math.abs(perlinNoise)%1 < 0.25)
 		{

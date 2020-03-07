@@ -49,7 +49,7 @@ public class PlayerPositionAndDimension implements IPlayerPosAndDim{
 
 	@Override
 	public void loadNBTData(CompoundNBT nbtTag) {
-		CompoundNBT cnbt = (CompoundNBT) nbtTag;
+		CompoundNBT cnbt = nbtTag;
 		BlockPos storedBlockPos = new BlockPos(cnbt.getInt("PrevX"), cnbt.getInt("PrevY"), cnbt.getInt("PrevZ"));
 		
 		//grabs past dimension resource location and tries to get that dimension from the registry

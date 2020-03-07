@@ -80,7 +80,7 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 		this.minNoise = new OctavesNoiseGenerator(this.randomSeed, 15, 0);
 		this.maxNoise = new OctavesNoiseGenerator(this.randomSeed, 15, 0);
 		this.mainNoise = new OctavesNoiseGenerator(this.randomSeed, 7, 0);
-		this.surfaceDepthNoise = (INoiseGenerator) (new PerlinNoiseGenerator(this.randomSeed, 3, 0));
+		this.surfaceDepthNoise = (new PerlinNoiseGenerator(this.randomSeed, 3, 0));
 	}
 
 	
@@ -91,19 +91,19 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 		double d3 = 1.0D;
 
 		for (int i = 0; i < 16; ++i) {
-			double limitX = OctavesNoiseGenerator.maintainPrecision((double) x * getCoordinateScale * d3);
-			double limitY = OctavesNoiseGenerator.maintainPrecision((double) y * getHeightScale * d3);
-			double limitZ = OctavesNoiseGenerator.maintainPrecision((double) z * getCoordinateScale * d3);
+			double limitX = OctavesNoiseGenerator.maintainPrecision(x * getCoordinateScale * d3);
+			double limitY = OctavesNoiseGenerator.maintainPrecision(y * getHeightScale * d3);
+			double limitZ = OctavesNoiseGenerator.maintainPrecision(z * getCoordinateScale * d3);
 
-			double mainX = OctavesNoiseGenerator.maintainPrecision((double) x * getMainCoordinateScale * d3);
-			double mainY = OctavesNoiseGenerator.maintainPrecision((double) y * getMainHeightScale * d3);
-			double mainZ = OctavesNoiseGenerator.maintainPrecision((double) z * getMainCoordinateScale * d3);
+			double mainX = OctavesNoiseGenerator.maintainPrecision(x * getMainCoordinateScale * d3);
+			double mainY = OctavesNoiseGenerator.maintainPrecision(y * getMainHeightScale * d3);
+			double mainZ = OctavesNoiseGenerator.maintainPrecision(z * getMainCoordinateScale * d3);
 			
 			double d7 = 684.412F * d3;
-			d0 += this.minNoise.getOctave(i).func_215456_a(limitX, limitY, limitZ, d7, (double) y * d7) ;
-			d1 += this.maxNoise.getOctave(i).func_215456_a(limitX, limitY, limitZ, d7, (double) y * d7) ;
+			d0 += this.minNoise.getOctave(i).func_215456_a(limitX, limitY, limitZ, d7, y * d7) ;
+			d1 += this.maxNoise.getOctave(i).func_215456_a(limitX, limitY, limitZ, d7, y * d7) ;
 			if (i < 8) {
-				d2 += this.mainNoise.getOctave(i).func_215456_a(mainX, mainY, mainZ, rangeMaybe * d3, (double) y * rangeMaybe * d3) / d3;
+				d2 += this.mainNoise.getOctave(i).func_215456_a(mainX, mainY, mainZ, rangeMaybe * d3, y * rangeMaybe * d3) / d3;
 			}
 
 			d3 /= 2.0D;
@@ -129,9 +129,9 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 			double valueAtY = this.internalSetupPerlinNoiseGenerators(x, y, z, getCoordinateScale, getHeightScale, getMainCoordinateScale, getMainHeightScale, rangeMaybe);
 			valueAtY = valueAtY - this.biomeHeightSmoother(nearbyArea1, nearbyArea2, y);
 			
-			if ((double) y > maxHeight) {
-				valueAtY = MathHelper.clampedLerp(valueAtY, (double) lerpValue, (double) y - maxHeight);
-			} else if ((double) y < minHeight) {
+			if (y > maxHeight) {
+				valueAtY = MathHelper.clampedLerp(valueAtY, lerpValue, y - maxHeight);
+			} else if (y < minHeight) {
 				valueAtY = MathHelper.clampedLerp(valueAtY, -20000D, 0.000025D);
 			}
 
@@ -145,7 +145,7 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 	protected abstract double biomeHeightSmoother(double p_222545_1_, double p_222545_3_, int p_222545_5_);
 	
 	protected double maxheight() {
-		return (double) (this.noiseSizeY() - 4);
+		return this.noiseSizeY() - 4;
 	}
 
 	protected double minHeight() {
@@ -218,7 +218,7 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 				int k1 = k + i1;
 				int l1 = l + j1;
 				int i2 = p_222535_1_.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, i1, j1) + 1;
-				double d1 = this.surfaceDepthNoise.noiseAt((double) k1 * 0.0625D, (double) l1 * 0.0625D, 0.0625D, (double) i1 * 0.0625D) * 10.0D;
+				double d1 = this.surfaceDepthNoise.noiseAt(k1 * 0.0625D, l1 * 0.0625D, 0.0625D, i1 * 0.0625D) * 10.0D;
 				p_225551_1_.getBiome(blockpos$mutable.setPos(k + i1, i2, l + j1)).buildSurface(sharedseedrandom, p_222535_1_, k1, l1, i2, d1, this.defaultBlock, this.defaultFluid, getSeaLevel(), this.world.getSeed());
 			}
 		}
@@ -437,8 +437,8 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 	}
 
 	private static double func_222554_b(int p_222554_0_, int p_222554_1_, int p_222554_2_) {
-		double d0 = (double) (p_222554_0_ * p_222554_0_ + p_222554_2_ * p_222554_2_);
-		double d1 = (double) p_222554_1_ + 0.5D;
+		double d0 = p_222554_0_ * p_222554_0_ + p_222554_2_ * p_222554_2_;
+		double d1 = p_222554_1_ + 0.5D;
 		double d2 = d1 * d1;
 		double d3 = Math.pow(Math.E, -(d2 / 16.0D + d0 / 16.0D));
 		double d4 = -d1 * MathHelper.fastInvSqrt(d2 / 2.0D + d0 / 2.0D) / 2.0D;
