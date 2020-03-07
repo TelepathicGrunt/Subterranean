@@ -59,7 +59,7 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-]
+            
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 

@@ -42,7 +42,7 @@ public class ShelfstoneCarver extends CaveWorldCarver
 	 * This is what calls carveCave and carveTunnel. Only here, we are doing just carveCave.
 	 */
 	@Override
-	public boolean carve(IChunk chunk, Function<BlockPos, Biome> biomeFunction, Random random, int unusedInt1, int xChunk, int zChunk, int unusedInt2, int unusedInt3, BitSet caveMask, ProbabilityConfig chanceConfig)
+	public boolean func_225555_a_(IChunk chunk, Function<BlockPos, Biome> biomeFunction, Random random, int unusedInt1, int xChunk, int zChunk, int unusedInt2, int unusedInt3, BitSet caveMask, ProbabilityConfig chanceConfig)
 	{
 		double x = xChunk * 16;// + random.nextInt(16));   // Randomizes spot of each room
 		double y = this.generateCaveStartY(random);  // Lowers each room by 20 blocks so they are stacked
@@ -50,34 +50,6 @@ public class ShelfstoneCarver extends CaveWorldCarver
 
 		float caveRadius = 10.0F + random.nextFloat() * 13.0F; // How thick the cave is
 		this.carveCave(chunk, biomeFunction, random.nextLong(), unusedInt1, unusedInt2, unusedInt3, x, y, z, caveRadius + random.nextFloat() * 10, caveRadius + random.nextFloat() * 10, random.nextFloat() * 0.4F + 0.6F, caveMask);
-
-		return true;
-	}
-
-
-	@Override
-	protected boolean carveAtPoint(IChunk chunk, Function<BlockPos, Biome> biomeFunction, BitSet carvingMask, Random random, BlockPos.Mutable posHere, BlockPos.Mutable posAbove, BlockPos.Mutable posBelow, int unusedInt1, int unusedInt2, int unusedInt3, int globalX, int globalZ, int x, int y, int z, AtomicBoolean foundSurface)
-	{
-		int index = x | z << 4 | y << 8; //Not sure what this specific section is for. I know the mask is used so other features can find caves space.
-		carvingMask.set(index);
-		posHere.setPos(globalX, y, globalZ);
-
-		BlockState state = chunk.getBlockState(posHere);
-		BlockState stateAbove = chunk.getBlockState(posAbove.setPos(posHere).move(Direction.UP));
-
-		if (!this.canCarveBlock(state, stateAbove))  // Makes sure we aren't carving a non terrain or liquid space
-		{
-			return false;
-		}
-
-		if (y > 23) // carves air when above lava level
-		{
-			chunk.setBlockState(posHere, STCarvers.THIN_AIR, false);
-		}
-		else // sets water at sea level and below
-		{
-			chunk.setBlockState(posHere, WATER.getBlockState(), false);
-		}
 
 		return true;
 	}
@@ -151,5 +123,32 @@ public class ShelfstoneCarver extends CaveWorldCarver
 		{
 			return false;
 		}
+	}
+	
+	
+	protected boolean carveAtPoint(IChunk chunk, Function<BlockPos, Biome> biomeFunction, BitSet carvingMask, Random random, BlockPos.Mutable posHere, BlockPos.Mutable posAbove, BlockPos.Mutable posBelow, int unusedInt1, int unusedInt2, int unusedInt3, int globalX, int globalZ, int x, int y, int z, AtomicBoolean foundSurface)
+	{
+		int index = x | z << 4 | y << 8; //Not sure what this specific section is for. I know the mask is used so other features can find caves space.
+		carvingMask.set(index);
+		posHere.setPos(globalX, y, globalZ);
+
+		BlockState state = chunk.getBlockState(posHere);
+		BlockState stateAbove = chunk.getBlockState(posAbove.setPos(posHere).move(Direction.UP));
+
+		if (!this.canCarveBlock(state, stateAbove))  // Makes sure we aren't carving a non terrain or liquid space
+		{
+			return false;
+		}
+
+		if (y > 23) // carves air when above lava level
+		{
+			chunk.setBlockState(posHere, STCarvers.THIN_AIR, false);
+		}
+		else // sets water at sea level and below
+		{
+			chunk.setBlockState(posHere, WATER.getBlockState(), false);
+		}
+
+		return true;
 	}
 }

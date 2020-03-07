@@ -48,7 +48,7 @@ public class GiantCavernCarver extends CaveWorldCarver
 	 * This is what calls carveCave and carveTunnel. Only here, we are doing just carveCave.
 	 */
 	@Override
-	public boolean carve(IChunk chunk, Function<BlockPos, Biome> biomeFunction, Random random, int yChunk, int xChunk, int zChunk, int xChunk2, int zChunk2, BitSet caveMask, ProbabilityConfig chanceConfig)
+	public boolean func_225555_a_(IChunk chunk, Function<BlockPos, Biome> biomeFunction, Random random, int yChunk, int xChunk, int zChunk, int xChunk2, int zChunk2, BitSet caveMask, ProbabilityConfig chanceConfig)
 	{
 		double x = xChunk * 16;// + random.nextInt(16));   // Randomizes spot of each room
 		double y = this.generateCaveStartY(random);  // 

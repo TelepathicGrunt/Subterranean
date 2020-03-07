@@ -42,7 +42,7 @@ public class BubbleColumnCarver extends CaveWorldCarver
 	 * the cave room.
 	 */
 	@Override
-	public boolean carve(IChunk chunk, Function<BlockPos, Biome> biomeFunction, Random random, int seaLevel, int xChunk1, int zChunk1, int xChunk2, int zChunk2, BitSet caveMask, ProbabilityConfig chanceConfig)
+	public boolean func_225555_a_(IChunk chunk, Function<BlockPos, Biome> biomeFunction, Random random, int seaLevel, int xChunk1, int zChunk1, int xChunk2, int zChunk2, BitSet caveMask, ProbabilityConfig chanceConfig)
 	{
 		int numberOfRooms = 4; // 4 sphere will be carved out.
 
@@ -55,7 +55,7 @@ public class BubbleColumnCarver extends CaveWorldCarver
 			float caveRadius = 20.0F + random.nextFloat() * 10.0F; // How big the cave sphere is (radius)
 
 			// The 0.5D is multiplied to the radius for the y direction. So this sphere will be squished vertically by half of the full radius.  
-			this.carveCave(chunk, biomeFunction, random.nextLong(), seaLevel, xChunk2, zChunk2, x, y, z, caveRadius, 0.5D, caveMask);
+			this.func_227205_a_(chunk, biomeFunction, random.nextLong(), seaLevel, xChunk2, zChunk2, x, y, z, caveRadius, 0.5D, caveMask);
 		}
 
 		return true;
@@ -67,7 +67,7 @@ public class BubbleColumnCarver extends CaveWorldCarver
 	 * blocks instead which would be interesting.
 	 */
 	@Override
-	protected boolean carveAtPoint(IChunk chunk, Function<BlockPos, Biome> biomeFunction, BitSet carvingMask, Random random, BlockPos.Mutable posHere, BlockPos.Mutable posAbove, BlockPos.Mutable posBelow, int seaLevel, int xChunk, int zChunk, int globalX, int globalZ, int x, int y, int z, AtomicBoolean foundSurface)
+	protected boolean func_225556_a_(IChunk chunk, Function<BlockPos, Biome> biomeFunction, BitSet carvingMask, Random random, BlockPos.Mutable posHere, BlockPos.Mutable posAbove, BlockPos.Mutable posBelow, int seaLevel, int xChunk, int zChunk, int globalX, int globalZ, int x, int y, int z, AtomicBoolean foundSurface)
 	{
 		/*
 		 * Not sure what this specific section is doing. I know this mask is used so other features can find caves space. Used

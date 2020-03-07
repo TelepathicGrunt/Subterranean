@@ -83,13 +83,13 @@ public class STChunkGenerator extends STNoiseChunkGenerator<OverworldGenSettings
 		float f1 = 0.0F;
 		float f2 = 0.0F;
 		int y = this.getSeaLevel();
-		float noiseDepth = this.biomeProvider.getBiomeForNoiseGen(noiseX, y, noiseZ).getDepth();
+		float noiseDepth = this.biomeProvider.getNoiseBiome(noiseX, y, noiseZ).getDepth();
 
 		for (int j = -2; j <= 2; ++j)
 		{
 			for (int k = -2; k <= 2; ++k)
 			{
-				Biome biome = this.biomeProvider.getBiomeForNoiseGen(noiseX + j, y, noiseZ + k);
+				Biome biome = this.biomeProvider.getNoiseBiome(noiseX + j, y, noiseZ + k);
 				float depthWeight = biome.getDepth();
 				float scaleWeight = biome.getScale();
 
@@ -115,9 +115,9 @@ public class STChunkGenerator extends STNoiseChunkGenerator<OverworldGenSettings
 	}
 
 
-	private double getNoiseDepthAt(int p_222574_1_, int p_222574_2_)
+	private double getNoiseDepthAt(int x, int z)
 	{
-		double noise = this.depthNoise.getValue(p_222574_1_ * 200, 10.0D, p_222574_2_ * 200, 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
+		double noise = this.depthNoise.getValue(x * 200, 10.0D, z * 200, 1.0D, 0.0D, true) * 65535.0D / 8000.0D;
 		if (noise < 0.0D)
 		{
 			noise = -noise * 0.3D;

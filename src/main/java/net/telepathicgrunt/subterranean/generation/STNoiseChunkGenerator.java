@@ -2,7 +2,6 @@ package net.telepathicgrunt.subterranean.generation;
 
 import java.util.Random;
 
-import it.unimi.dsi.fastutil.longs.LongIterator;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectListIterator;
@@ -26,13 +25,8 @@ import net.minecraft.world.gen.INoiseGenerator;
 import net.minecraft.world.gen.OctavesNoiseGenerator;
 import net.minecraft.world.gen.PerlinNoiseGenerator;
 import net.minecraft.world.gen.WorldGenRegion;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.jigsaw.JigsawJunction;
-import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
 import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructurePiece;
-import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.telepathicgrunt.subterranean.blocks.STBlocks;
 
 
@@ -237,39 +231,39 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 
 
 	@Override
-	public void buildSurface(WorldGenRegion p_225551_1_, IChunk p_222535_1_)
+	public void func_225551_a_(WorldGenRegion region, IChunk chunk)
 	{
-		ChunkPos chunkpos = p_222535_1_.getPos();
-		int i = chunkpos.x;
-		int j = chunkpos.z;
+		ChunkPos chunkpos = chunk.getPos();
+		int xChunk = chunkpos.x;
+		int zChunk = chunkpos.z;
 		SharedSeedRandom sharedseedrandom = new SharedSeedRandom();
-		sharedseedrandom.setBaseChunkSeed(i, j);
-		ChunkPos chunkpos1 = p_222535_1_.getPos();
-		int k = chunkpos1.getXStart();
-		int l = chunkpos1.getZStart();
+		sharedseedrandom.setBaseChunkSeed(xChunk, zChunk);
+		ChunkPos chunkpos1 = chunk.getPos();
+		int xPosOfChunk = chunkpos1.getXStart();
+		int zPosOfChunk = chunkpos1.getZStart();
 		BlockPos.Mutable blockpos$mutable = new BlockPos.Mutable();
 
-		for (int i1 = 0; i1 < 16; ++i1)
+		for (int xInChunk = 0; xInChunk < 16; ++xInChunk)
 		{
-			for (int j1 = 0; j1 < 16; ++j1)
+			for (int zInChunk = 0; zInChunk < 16; ++zInChunk)
 			{
-				int k1 = k + i1;
-				int l1 = l + j1;
-				int i2 = p_222535_1_.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, i1, j1) + 1;
-				double d1 = this.surfaceDepthNoise.noiseAt(k1 * 0.0625D, l1 * 0.0625D, 0.0625D, i1 * 0.0625D) * 10.0D;
-				p_225551_1_.getBiome(blockpos$mutable.setPos(k + i1, i2, l + j1)).buildSurface(sharedseedrandom, p_222535_1_, k1, l1, i2, d1, this.defaultBlock, this.defaultFluid, getSeaLevel(), this.world.getSeed());
+				int xPos = xPosOfChunk + xInChunk;
+				int zPos = zPosOfChunk + zInChunk;
+				int yPos = chunk.getTopBlockY(Heightmap.Type.WORLD_SURFACE_WG, xInChunk, zInChunk) + 1;
+				double noise = this.surfaceDepthNoise.noiseAt(xPos * 0.0625D, zPos * 0.0625D, 0.0625D, xInChunk * 0.0625D) * 10.0D;
+				region.getBiome(blockpos$mutable.setPos(xPosOfChunk + xInChunk, yPos, zPosOfChunk + zInChunk)).buildSurface(sharedseedrandom, chunk, xPos, zPos, yPos, noise, this.defaultBlock, this.defaultFluid, getSeaLevel(), this.world.getSeed());
 			}
 		}
 
-		this.makeBedrock(p_222535_1_, sharedseedrandom);
+		this.makeBedrock(chunk, sharedseedrandom);
 	}
 
 
-	protected void makeBedrock(IChunk p_222555_1_, Random p_222555_2_)
+	protected void makeBedrock(IChunk chunk, Random random)
 	{
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
-		int i = p_222555_1_.getPos().getXStart();
-		int j = p_222555_1_.getPos().getZStart();
+		int i = chunk.getPos().getXStart();
+		int j = chunk.getPos().getZStart();
 		int bedrockFloorHeight = 0;
 		int bedrockCeilingHeight = 255;
 
@@ -279,9 +273,9 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 			{
 				for (int i1 = bedrockCeilingHeight; i1 >= bedrockCeilingHeight - 4; --i1)
 				{
-					if (i1 >= bedrockCeilingHeight - p_222555_2_.nextInt(5))
+					if (i1 >= bedrockCeilingHeight - random.nextInt(5))
 					{
-						p_222555_1_.setBlockState(blockpos$Mutable.setPos(blockpos.getX(), i1, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
+						chunk.setBlockState(blockpos$Mutable.setPos(blockpos.getX(), i1, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
 					}
 				}
 			}
@@ -290,9 +284,9 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 			{
 				for (int j1 = bedrockFloorHeight + 4; j1 >= bedrockFloorHeight; --j1)
 				{
-					if (j1 <= bedrockFloorHeight + p_222555_2_.nextInt(5))
+					if (j1 <= bedrockFloorHeight + random.nextInt(5))
 					{
-						p_222555_1_.setBlockState(blockpos$Mutable.setPos(blockpos.getX(), j1, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
+						chunk.setBlockState(blockpos$Mutable.setPos(blockpos.getX(), j1, blockpos.getZ()), Blocks.BEDROCK.getDefaultState(), false);
 					}
 				}
 			}
@@ -302,54 +296,54 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 
 
 	@Override
-	public void makeBase(IWorld p_222537_1_, IChunk p_222537_2_)
+	public void makeBase(IWorld world, IChunk chunk)
 	{
 		ObjectList<AbstractVillagePiece> objectlist = new ObjectArrayList<>(10);
 		ObjectList<JigsawJunction> objectlist1 = new ObjectArrayList<>(32);
-		ChunkPos chunkpos = p_222537_2_.getPos();
+		ChunkPos chunkpos = chunk.getPos();
 		int chunkX = chunkpos.x;
 		int chunkZ = chunkpos.z;
 		int coordinateX = chunkX << 4;
 		int coordinateZ = chunkZ << 4;
-
-		for (Structure<?> structure : Feature.ILLAGER_STRUCTURES)
-		{
-			String s = structure.getStructureName();
-			LongIterator longiterator = p_222537_2_.getStructureReferences(s).iterator();
-
-			while (longiterator.hasNext())
-			{
-				long j1 = longiterator.nextLong();
-				ChunkPos chunkpos1 = new ChunkPos(j1);
-				IChunk ichunk = p_222537_1_.getChunk(chunkpos1.x, chunkpos1.z);
-				StructureStart structurestart = ichunk.getStructureStart(s);
-				if (structurestart != null && structurestart.isValid())
-				{
-					for (StructurePiece structurepiece : structurestart.getComponents())
-					{
-						if (structurepiece.func_214810_a(chunkpos, 12) && structurepiece instanceof AbstractVillagePiece)
-						{
-							AbstractVillagePiece abstractvillagepiece = (AbstractVillagePiece) structurepiece;
-							JigsawPattern.PlacementBehaviour jigsawpattern$placementbehaviour = abstractvillagepiece.getJigsawPiece().getPlacementBehaviour();
-							if (jigsawpattern$placementbehaviour == JigsawPattern.PlacementBehaviour.RIGID)
-							{
-								objectlist.add(abstractvillagepiece);
-							}
-
-							for (JigsawJunction jigsawjunction : abstractvillagepiece.getJunctions())
-							{
-								int k1 = jigsawjunction.getSourceX();
-								int l1 = jigsawjunction.getSourceZ();
-								if (k1 > coordinateX - 12 && l1 > coordinateZ - 12 && k1 < coordinateX + 15 + 12 && l1 < coordinateZ + 15 + 12)
-								{
-									objectlist1.add(jigsawjunction);
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+//
+//		for (Structure<?> structure : Feature.ILLAGER_STRUCTURES)
+//		{
+//			String s = structure.getStructureName();
+//			LongIterator longiterator = chunk.getStructureReferences(s).iterator();
+//
+//			while (longiterator.hasNext())
+//			{
+//				long j1 = longiterator.nextLong();
+//				ChunkPos chunkpos1 = new ChunkPos(j1);
+//				IChunk ichunk = world.getChunk(chunkpos1.x, chunkpos1.z);
+//				StructureStart structurestart = ichunk.getStructureStart(s);
+//				if (structurestart != null && structurestart.isValid())
+//				{
+//					for (StructurePiece structurepiece : structurestart.getComponents())
+//					{
+//						if (structurepiece.func_214810_a(chunkpos, 12) && structurepiece instanceof AbstractVillagePiece)
+//						{
+//							AbstractVillagePiece abstractvillagepiece = (AbstractVillagePiece) structurepiece;
+//							JigsawPattern.PlacementBehaviour jigsawpattern$placementbehaviour = abstractvillagepiece.getJigsawPiece().getPlacementBehaviour();
+//							if (jigsawpattern$placementbehaviour == JigsawPattern.PlacementBehaviour.RIGID)
+//							{
+//								objectlist.add(abstractvillagepiece);
+//							}
+//
+//							for (JigsawJunction jigsawjunction : abstractvillagepiece.getJunctions())
+//							{
+//								int k1 = jigsawjunction.getSourceX();
+//								int l1 = jigsawjunction.getSourceZ();
+//								if (k1 > coordinateX - 12 && l1 > coordinateZ - 12 && k1 < coordinateX + 15 + 12 && l1 < coordinateZ + 15 + 12)
+//								{
+//									objectlist1.add(jigsawjunction);
+//								}
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
 
 		double[][][] adouble = new double[2][this.noiseSizeZ + 1][this.noiseSizeY + 1];
 
@@ -360,7 +354,7 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 			adouble[1][j5] = new double[this.noiseSizeY + 1];
 		}
 
-		ChunkPrimer chunkprimer = (ChunkPrimer) p_222537_2_;
+		ChunkPrimer chunkprimer = (ChunkPrimer) chunk;
 		Heightmap heightmap = chunkprimer.getHeightmap(Heightmap.Type.OCEAN_FLOOR_WG);
 		Heightmap heightmap1 = chunkprimer.getHeightmap(Heightmap.Type.WORLD_SURFACE_WG);
 		BlockPos.Mutable blockpos$Mutable = new BlockPos.Mutable();
@@ -376,7 +370,7 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 
 			for (int i6 = 0; i6 < this.noiseSizeZ; ++i6)
 			{
-				ChunkSection chunksection = chunkprimer.func_217332_a(15);
+				ChunkSection chunksection = chunkprimer.getSection(15);
 				chunksection.lock();
 
 				for (int j6 = this.noiseSizeY - 1; j6 >= 0; --j6)
@@ -398,7 +392,7 @@ public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extend
 						if (chunksection.getYLocation() >> 4 != l2)
 						{
 							chunksection.unlock();
-							chunksection = chunkprimer.func_217332_a(l2);
+							chunksection = chunkprimer.getSection(l2);
 							chunksection.lock();
 						}
 

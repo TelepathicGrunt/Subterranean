@@ -98,7 +98,7 @@ public class STBiomeProvider extends BiomeProvider
 
 
 	@Override
-	public Set<Biome> getBiomesInArea(int centerX, int centerY, int centerZ, int sideLength)
+	public Set<Biome> func_225530_a_(int centerX, int centerY, int centerZ, int sideLength)
 	{
 		int i = centerX - sideLength >> 2;
 		int j = centerY - sideLength >> 2;
@@ -120,7 +120,7 @@ public class STBiomeProvider extends BiomeProvider
 					int i3 = i + k2;
 					int j3 = j + l2;
 					int k3 = k + j2;
-					set.add(this.getBiomeForNoiseGen(i3, j3, k3));
+					set.add(this.getNoiseBiome(i3, j3, k3));
 				}
 			}
 		}
@@ -144,7 +144,7 @@ public class STBiomeProvider extends BiomeProvider
 		{
 			int i2 = i + l1 % i1 << 2;
 			int j2 = j + l1 / i1 << 2;
-			if (biomes.contains(this.getBiomeForNoiseGen(i2, k1, j2)))
+			if (biomes.contains(this.getNoiseBiome(i2, k1, j2)))
 			{
 				if (blockpos == null || random.nextInt(k1 + 1) == 0)
 				{
@@ -193,7 +193,7 @@ public class STBiomeProvider extends BiomeProvider
 
 
 	@Override
-	public Biome getBiomeForNoiseGen(int p_225526_1_, int p_225526_2_, int p_225526_3_)
+	public Biome getNoiseBiome(int p_225526_1_, int p_225526_2_, int p_225526_3_)
 	{
 		return this.genBiomes.func_215738_a(p_225526_1_, p_225526_3_);
 	}

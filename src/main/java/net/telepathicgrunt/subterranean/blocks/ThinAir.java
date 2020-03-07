@@ -83,7 +83,7 @@ public class ThinAir extends Block
 
 
 	@Override
-	public void scheduledTick(BlockState blockState, ServerWorld serverWorld, BlockPos blockPos, Random random)
+	public void tick(BlockState blockState, ServerWorld serverWorld, BlockPos blockPos, Random random)
 	{
 		serverWorld.setBlockState(blockPos, updateDistance(blockState, serverWorld, blockPos), 3);
 	}
