@@ -16,7 +16,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import net.telepathicgrunt.subterranean.blocks.BlocksInit;
+import net.telepathicgrunt.subterranean.blocks.STBlocks;
 import net.telepathicgrunt.subterranean.capabilities.CapabilityPlayerPosAndDim;
 import net.telepathicgrunt.subterranean.features.carvers.STCarvers;
 import net.telepathicgrunt.subterranean.world.biome.BiomeInit;
@@ -60,7 +60,7 @@ public class Subterranean
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) 
         {
-        	BlocksInit.registerBlocks(blockRegistryEvent);
+        	STBlocks.registerBlocks(blockRegistryEvent);
         }
         
 		/**
@@ -69,7 +69,7 @@ public class Subterranean
 		 */
 		@SubscribeEvent
 		public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
-			BlocksInit.registerItems(event);
+		//	BlocksInit.registerItems(event);
 		}
 		
 

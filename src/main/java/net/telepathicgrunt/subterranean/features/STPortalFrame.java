@@ -13,7 +13,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.telepathicgrunt.subterranean.blocks.BlocksInit;
+import net.telepathicgrunt.subterranean.blocks.STBlocks;
 
 public class STPortalFrame extends Feature<NoFeatureConfig> {
 
@@ -60,7 +60,7 @@ public class STPortalFrame extends Feature<NoFeatureConfig> {
 	   
 
 	   //the portal itself
-	   world.setBlockState(pos.add(0, 1, 0), BlocksInit.SUBTERRANEAN_PORTAL.get().getDefaultState(), 3);
+	   world.setBlockState(pos.add(0, 1, 0), STBlocks.THIN_AIR.get().getDefaultState(), 3);
 
 	   //top of portal frame
 	   for(int x = -1; x <= 1; x++) {

@@ -5,8 +5,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
-import net.telepathicgrunt.subterranean.world.biomes.surfacebuilders.PodzolSurfaceBuilder;
 import net.telepathicgrunt.subterranean.world.biomes.surfacebuilders.LargeStalactiteSurfaceBuilder;
+import net.telepathicgrunt.subterranean.world.biomes.surfacebuilders.PodzolSurfaceBuilder;
 import net.telepathicgrunt.subterranean.world.biomes.surfacebuilders.SmallStalactiteSurfaceBuilder;
 import net.telepathicgrunt.subterranean.world.biomes.surfacebuilders.StoneSurfaceBuilder;
 

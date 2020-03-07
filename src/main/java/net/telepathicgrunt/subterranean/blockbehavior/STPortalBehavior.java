@@ -30,7 +30,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.telepathicgrunt.subterranean.Subterranean;
-import net.telepathicgrunt.subterranean.blocks.BlocksInit;
+import net.telepathicgrunt.subterranean.blocks.STBlocks;
 import net.telepathicgrunt.subterranean.capabilities.IPlayerPosAndDim;
 import net.telepathicgrunt.subterranean.capabilities.PlayerPositionAndDimension;
 import net.telepathicgrunt.subterranean.features.STPortalFrame;
@@ -54,7 +54,7 @@ public class STPortalBehavior {
 
 			// checks to see if player uses right click on amplified portal and if so
 			// teleports player to other dimension
-			if (event.getWorld().getBlockState(event.getPos()) == BlocksInit.SUBTERRANEAN_PORTAL.get().getDefaultState())
+			if (event.getWorld().getBlockState(event.getPos()) == STBlocks.THIN_AIR.get().getDefaultState())
 			{
 				//extra checking to make sure it's just the player alone and not riding, being ridden, etc 
 				//Also makes sure player isn't sneaking so players can crouch place blocks on the portal
@@ -111,7 +111,7 @@ public class STPortalBehavior {
 						
 						//finds where portal block is
 						while(portalY > 0) {
-							if(serverworld.getBlockState(pos.up(portalY)) == BlocksInit.SUBTERRANEAN_PORTAL.get().getDefaultState()) {
+							if(serverworld.getBlockState(pos.up(portalY)) == STBlocks.THIN_AIR.get().getDefaultState()) {
 								break;
 							}
 							portalY--;
@@ -203,7 +203,7 @@ public class STPortalBehavior {
 	    	world.getChunkAt(pos);
 	    	
 	    	while(pos.getY() >= 0) {
-	    		if(world.getBlockState(pos) == BlocksInit.SUBTERRANEAN_PORTAL.get().getDefaultState()) {
+	    		if(world.getBlockState(pos) == STBlocks.THIN_AIR.get().getDefaultState()) {
 	    			return true;
 	    		}
 	    		pos = pos.down();
@@ -290,7 +290,7 @@ public class STPortalBehavior {
 		public static void placePortalBlocks(IWorld world, BlockPos pos)
 		{
 			// the portal itself
-			world.setBlockState(pos.add(0, 0, 0), BlocksInit.SUBTERRANEAN_PORTAL.get().getDefaultState(), 18);
+			world.setBlockState(pos.add(0, 0, 0), STBlocks.THIN_AIR.get().getDefaultState(), 18);
 		}
 
 		public static boolean trySpawnPortal(IWorld world, BlockPos pos)

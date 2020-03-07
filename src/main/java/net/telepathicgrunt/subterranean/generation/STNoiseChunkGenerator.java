@@ -33,13 +33,13 @@ import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.StructureStart;
-import net.telepathicgrunt.subterranean.Subterranean;
+import net.telepathicgrunt.subterranean.blocks.STBlocks;
 
 public abstract class STNoiseChunkGenerator<T extends GenerationSettings> extends ChunkGenerator<T> {
 
 	private static final BlockState STONE = Blocks.STONE.getDefaultState();
     private static final BlockState WATER = Blocks.WATER.getDefaultState();
-    private static final BlockState AIR = Blocks.AIR.getDefaultState();
+    private static final BlockState AIR = STBlocks.THIN_AIR.get().getDefaultState();
 	
  	
 	
