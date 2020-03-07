@@ -71,7 +71,7 @@ public class ShelfstoneCarver extends CaveWorldCarver
 
 		if (y > 23) // carves air when above lava level
 		{
-			chunk.setBlockState(posHere, CAVE_AIR, false);
+			chunk.setBlockState(posHere, STCarvers.THIN_AIR, false);
 		}
 		else // sets water at sea level and below
 		{

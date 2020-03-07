@@ -1,13 +1,17 @@
 package net.telepathicgrunt.subterranean.features.carvers;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.telepathicgrunt.subterranean.RegUtil;
+import net.telepathicgrunt.subterranean.blocks.STBlocks;
 
 public class STCarvers
 {
+	public static final BlockState THIN_AIR = STBlocks.THIN_AIR.get().getDefaultState();
+	
     public static WorldCarver<ProbabilityConfig> TEST_CARVER = new ShelfstoneCarver(ProbabilityConfig::deserialize);
     public static WorldCarver<ProbabilityConfig> SHELFSTONE_CARVER = new ShelfstoneCarver(ProbabilityConfig::deserialize);
     public static WorldCarver<ProbabilityConfig> BUBBLE_COLUMN_CARVER = new BubbleColumnCarver(ProbabilityConfig::deserialize);

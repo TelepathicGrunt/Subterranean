@@ -156,7 +156,7 @@ public class GiantCavernCarver extends CaveWorldCarver
 		}
 		else  // carves air when above lava level
 		{
-			chunk.setBlockState(posHere, CAVE_AIR, false);
+			chunk.setBlockState(posHere, STCarvers.THIN_AIR, false);
 		}
 
 		return true;
