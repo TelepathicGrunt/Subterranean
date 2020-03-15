@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.carver.WorldCarver;
+import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,6 +21,7 @@ import net.telepathicgrunt.subterranean.blocks.STBlocks;
 import net.telepathicgrunt.subterranean.capabilities.CapabilityPlayerPosAndDim;
 import net.telepathicgrunt.subterranean.features.carvers.STCarvers;
 import net.telepathicgrunt.subterranean.world.biome.BiomeInit;
+import net.telepathicgrunt.subterranean.world.biomes.surfacebuilders.STSurfaceBuilders;
 
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -78,6 +80,16 @@ public class Subterranean
 		public static void onRegisterItems(final RegistryEvent.Register<Item> event)
 		{
 			//	BlocksInit.registerItems(event);
+		}
+
+
+		/**
+		 * This method will be called by Forge when it is time for the mod to register surface builders.
+		 */
+		@SubscribeEvent
+		public static void onRegisterSurfacebuilders(final RegistryEvent.Register<SurfaceBuilder<?>> event)
+		{
+			STSurfaceBuilders.registerSurfaceBuilders(event);
 		}
 
 

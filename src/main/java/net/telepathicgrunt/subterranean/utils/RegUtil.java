@@ -1,4 +1,4 @@
-package net.telepathicgrunt.subterranean;
+package net.telepathicgrunt.subterranean.utils;
 
 import java.util.Locale;
 
@@ -10,6 +10,7 @@ import net.minecraft.world.gen.feature.structure.IStructurePieceType;
 import net.minecraftforge.registries.GameData;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.telepathicgrunt.subterranean.Subterranean;
 
 
 public class RegUtil

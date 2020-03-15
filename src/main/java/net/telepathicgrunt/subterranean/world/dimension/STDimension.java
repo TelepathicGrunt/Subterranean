@@ -12,8 +12,8 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.telepathicgrunt.subterranean.RegUtil;
 import net.telepathicgrunt.subterranean.Subterranean;
+import net.telepathicgrunt.subterranean.utils.RegUtil;
 
 
 @Mod.EventBusSubscriber(modid = Subterranean.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)

@@ -13,7 +13,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
-import net.telepathicgrunt.subterranean.world.biome.STBiome;
 
 
 public class PodzolSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
@@ -54,7 +53,7 @@ public class PodzolSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 			}
 			else if (noisemod < 0.6D || noisemod > 1.7)
 			{
-				SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, STBiome.COARSE_DIRT_ANDESITE_GRAVEL_CONFIG);
+				SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, STSurfaceBuilders.COARSE_DIRT_ANDESITE_GRAVEL_CONFIG);
 			}
 			else if (noisemod < 0.9 || noisemod > 1.4)
 			{
@@ -67,7 +66,7 @@ public class PodzolSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 		}
 		else if (heightOfLand > 17)
 		{
-			SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, STBiome.COARSE_DIRT_ANDESITE_GRAVEL_CONFIG);
+			SurfaceBuilder.DEFAULT.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, STSurfaceBuilders.COARSE_DIRT_ANDESITE_GRAVEL_CONFIG);
 		}
 		else
 		{
@@ -111,15 +110,15 @@ public class PodzolSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 		}
 
 		//do stalactite last
-		STBiome.LARGE_STALACTITE_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, STBiome.STONE_STONE_STONE_SURFACE_CONFIG);
-		STBiome.SMALL_STALACTITE_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, STBiome.STONE_STONE_STONE_SURFACE_CONFIG);
+		STSurfaceBuilders.LARGE_STALACTITE_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, STSurfaceBuilders.STONE_STONE_STONE_SURFACE_CONFIG);
+		STSurfaceBuilders.SMALL_STALACTITE_SURFACE_BUILDER.buildSurface(random, chunkIn, biomeIn, x, z, startHeight, noise, defaultBlock, defaultFluid, seaLevel, seed, STSurfaceBuilders.STONE_STONE_STONE_SURFACE_CONFIG);
 	}
 
 
 	@Override
 	public void setSeed(long seed)
 	{
-		STBiome.LARGE_STALACTITE_SURFACE_BUILDER.setSeed(seed);
-		STBiome.SMALL_STALACTITE_SURFACE_BUILDER.setSeed(seed);
+		STSurfaceBuilders.LARGE_STALACTITE_SURFACE_BUILDER.setSeed(seed);
+		STSurfaceBuilders.SMALL_STALACTITE_SURFACE_BUILDER.setSeed(seed);
 	}
 }

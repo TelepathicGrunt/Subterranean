@@ -16,13 +16,14 @@ import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.telepathicgrunt.subterranean.world.biome.STBiome;
+import net.telepathicgrunt.subterranean.world.biomes.surfacebuilders.STSurfaceBuilders;
 
 
 public final class WaterFloorBiome extends STBiome
 {
 	public WaterFloorBiome()
 	{
-		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(PODZOL_SURFACE_BUILDER, STONE_ANDESITE_GRAVEL_SURFACE_CONFIG)).precipitation(Biome.RainType.NONE).category(Biome.Category.OCEAN).depth(-2.7F).scale(1F).temperature(0.3F).downfall(0.0F).waterColor(3093146).waterFogColor(2172035).parent((String) null));
+		super((new Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(STSurfaceBuilders.PODZOL_SURFACE_BUILDER, STSurfaceBuilders.STONE_ANDESITE_GRAVEL_SURFACE_CONFIG)).precipitation(Biome.RainType.NONE).category(Biome.Category.OCEAN).depth(-2.7F).scale(1F).temperature(0.3F).downfall(0.0F).waterColor(3093146).waterFogColor(2172035).parent((String) null));
 
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.DISK.withConfiguration(new SphereReplaceConfig(COAL_ORE, 4, 2, Lists.newArrayList(GRAVEL, ANDESITE))).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(6, 5, 0, 24))));
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.DISK.withConfiguration(new SphereReplaceConfig(LIGHT_GRAY_CONCRETE, 4, 2, Lists.newArrayList(GRAVEL, ANDESITE))).withPlacement(Placement.COUNT_RANGE.configure(new CountRangeConfig(4, 5, 0, 24))));
