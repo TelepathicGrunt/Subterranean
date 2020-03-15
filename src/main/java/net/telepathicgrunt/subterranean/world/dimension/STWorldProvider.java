@@ -66,8 +66,6 @@ public class STWorldProvider extends Dimension
 		return this.findSpawn(new ChunkPos(posX, posZ), checkValid);
 	}
 
-
-	//mimics vanilla sky movement
 	@Override
 	public float calculateCelestialAngle(long worldTime, float partialTicks)
 	{
@@ -89,34 +87,7 @@ public class STWorldProvider extends Dimension
 		return false;
 	}
 
-
-	@Nullable
-	@OnlyIn(Dist.CLIENT)
-	@Override
-	public net.minecraftforge.client.IRenderHandler getSkyRenderer()
-	{
-		return null;
-	}
-
-
-	@Nullable
-	@OnlyIn(Dist.CLIENT)
-	@Override
-	public net.minecraftforge.client.IRenderHandler getCloudRenderer()
-	{
-		return null;
-	}
-
-
-	@Nullable
-	@OnlyIn(Dist.CLIENT)
-	@Override
-	public net.minecraftforge.client.IRenderHandler getWeatherRenderer()
-	{
-		return null;
-	}
-
-
+	
 	/**
 	 * Returns array with sunrise/sunset colors
 	 */
@@ -136,7 +107,7 @@ public class STWorldProvider extends Dimension
 	@OnlyIn(Dist.CLIENT)
 	public float getCloudHeight()
 	{
-		return 280;
+		return -1;
 	}
 
 
